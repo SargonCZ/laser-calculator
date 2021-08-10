@@ -1,0 +1,12 @@
+name: laser-calculator
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+# use specific Python version to avoid possible incompatibilities
+  - python=3.9
+  - numpy=1.19.4
+  - astropy=4.2
+  - pint
+  - ipython
+  - uncertainties
