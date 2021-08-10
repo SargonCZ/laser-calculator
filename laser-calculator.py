@@ -30,7 +30,6 @@ class Calculator(ttk.Frame):
         frame_choose_function.grid(row=0,column=0,sticky="nsew")
 
 
-
     def on_function_selected(self,event=None):
         try:
             self.frame_main.grid_forget()
@@ -42,13 +41,19 @@ class Calculator(ttk.Frame):
 
         self.frame_main = ttk.Frame(self)
         ttk.Label(self.frame_main,text=self.settings[fun]["description"],wraplength=280,justify="left").grid(row=0,column=0,sticky="ew",columnspan=3)
+        try:
+            self.formula_preview = tk.PhotoImage(file="formulas/{}.png".format(fun))
+            ttk.Label(self.frame_main,image=self.formula_preview).grid(row=1,column=1,sticky="ew",columnspan=3)
+        except:
+            pass
+
         self.inputs_units = []
         self.inputs_values = []
         self.inputs_CB = []
         for ind,name in enumerate(self.settings[fun]["inputs"].keys()):
-            ttk.Label(self.frame_main,text=name).grid(row=1+ind,column=0,sticky="w")
+            ttk.Label(self.frame_main,text=name).grid(row=2+ind,column=0,sticky="w")
             self.inputs_values.append(tk.StringVar(value=0))
-            ttk.Entry(self.frame_main,textvariable=self.inputs_values[ind]).grid(row=1+ind,column=1,sticky="ew")
+            ttk.Entry(self.frame_main,textvariable=self.inputs_values[ind]).grid(row=2+ind,column=1,sticky="ew")
             self.inputs_units.append(tk.StringVar())
             try: 
                 self.inputs_units[ind].set(value=self.settings[fun]["inputs"][name]["units"][0])
@@ -57,7 +62,7 @@ class Calculator(ttk.Frame):
             self.inputs_CB.append(ttk.Combobox(self.frame_main,textvariable=self.inputs_units[ind],width=10))
             self.inputs_CB[ind]["values"] = self.settings[fun]["inputs"][name]["units"]
             self.inputs_CB[ind].state(["readonly"])
-            self.inputs_CB[ind].grid(row=1+ind,column=2,sticky="e")
+            self.inputs_CB[ind].grid(row=2+ind,column=2,sticky="e")
         
         ttk.Label(self.frame_main,text=f"Units of output ({self.settings[fun]['outputs']['name']})").grid(row=100,column=0,sticky="ew",columnspan=2)
         self.output = tk.StringVar()        

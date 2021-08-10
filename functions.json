@@ -1,5 +1,5 @@
 {
-    "peak intensity" : {
+    "peak-intensity" : {
         "name" : "Peak intensity (Gaussian)",
         "description" : "Calculates the peak intensity of a laser pulse with an assumption of a Gaussian laser pulse shape and a Gaussian laser beam. The beam diameter follows the D4s definition. The pulse duration is at FWHM.",
         "function_stara" : "0.598*I[0].to('J')/((I[1].to('mm')/20)**2*I[2].to('ps'))*1e3",
@@ -38,7 +38,7 @@
             ]
         }
     },
-    "snell law" : {
+    "snell-law" : {
         "name" : "Snell's law",
         "description" : "Based on indexes of refraction and an external angle of incidence, calculates the angle of refraction (internal angle).",
         "function" : "np.arcsin(I[0]/I[1]*np.sin(I[2].to('rad')))",
