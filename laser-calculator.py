@@ -43,7 +43,7 @@ class Calculator(ttk.Frame):
         ttk.Label(self.frame_main,text=self.settings[fun]["description"],wraplength=280,justify="left").grid(row=0,column=0,sticky="ew",columnspan=3)
         try:
             self.formula_preview = tk.PhotoImage(file="formulas/{}.png".format(fun))
-            ttk.Label(self.frame_main,image=self.formula_preview).grid(row=1,column=1,sticky="ew",columnspan=3)
+            ttk.Label(self.frame_main,image=self.formula_preview).grid(row=1,column=0,sticky="ew",columnspan=3)
         except:
             pass
 

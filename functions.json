@@ -2,8 +2,7 @@
     "peak-intensity" : {
         "name" : "Peak intensity (Gaussian)",
         "description" : "Calculates the peak intensity of a laser pulse with an assumption of a Gaussian laser pulse shape and a Gaussian laser beam. The beam diameter follows the D4s definition. The pulse duration is at FWHM.",
-        "function_stara" : "0.598*I[0].to('J')/((I[1].to('mm')/20)**2*I[2].to('ps'))*1e3",
-        "function" : "2*I[0].to('J')*2/(np.pi*(I[1].to('m')/2)**2)/I[2].to('s')*np.sqrt(np.log(2)/np.pi)",
+        "function" : "2*I[0]*2/(np.pi*(I[1]/2)**2)/I[2]*np.sqrt(np.log(2)/np.pi)",
         "inputs": {
             "Energy" : {
                 "position" : 0,
@@ -66,6 +65,62 @@
             "units" : [
                 "deg",
                 "rad"
+            ]
+        }
+    },
+    "SFG" : {
+        "name" : "Sum frequency generation",
+        "description" : "Calculates wavelenghts in sum frequency generation process",
+        "function" : "1/(1/I[0] + 1/I[1])",
+        "inputs" : {
+            "l1" : {
+                "position" : 0,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            },
+            "l2" : {
+                "position" : 1,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            }            
+        },
+        "outputs" : {
+            "name" : "l3 (lowest)",
+            "units" : [
+                "um",
+                "nm"
+            ]
+        }
+    },
+    "DFG" : {
+        "name" : "Difference frequency generation",
+        "description" : "Calculates wavelenghts in difference frequency generation process",
+        "function" : "1/(1/I[0] - 1/I[1])",
+        "inputs" : {
+            "l3 (lowest)" : {
+                "position" : 0,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            },
+            "l2" : {
+                "position" : 1,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            }            
+        },
+        "outputs" : {
+            "name" : "l1",
+            "units" : [
+                "um",
+                "nm"
             ]
         }
     }
