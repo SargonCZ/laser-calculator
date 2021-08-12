@@ -1,6 +1,7 @@
 {
     "peak-intensity" : {
-        "name" : "Peak intensity (Gaussian)",
+        "name" : "(Lasers) Peak intensity (Gaussian)",
+        "regime" : "calc",
         "description" : "Calculates the peak intensity of a laser pulse with an assumption of a Gaussian laser pulse shape and a Gaussian laser beam. The beam diameter follows the D4s definition. The pulse duration is at FWHM.",
         "function" : "2*I[0]*2/(np.pi*(I[1]/2)**2)/I[2]*np.sqrt(np.log(2)/np.pi)",
         "inputs": {
@@ -38,7 +39,8 @@
         }
     },
     "snell-law" : {
-        "name" : "Snell's law",
+        "name" : "(Optics) Snell's law",
+        "regime" : "calc",
         "description" : "Based on indexes of refraction and an external angle of incidence, calculates the angle of refraction (internal angle).",
         "function" : "np.arcsin(I[0]/I[1]*np.sin(I[2].to('rad')))",
         "inputs" : {
@@ -68,60 +70,36 @@
             ]
         }
     },
-    "SFG" : {
-        "name" : "Sum frequency generation",
-        "description" : "Calculates wavelenghts in sum frequency generation process",
-        "function" : "1/(1/I[0] + 1/I[1])",
-        "inputs" : {
-            "l1" : {
-                "position" : 0,
-                "units" : [
-                    "um",
-                    "nm"
-                ]
-            },
-            "l2" : {
-                "position" : 1,
-                "units" : [
-                    "um",
-                    "nm"
-                ]
-            }            
-        },
-        "outputs" : {
-            "name" : "l3 (lowest)",
-            "units" : [
-                "um",
-                "nm"
-            ]
-        }
-    },
-    "DFG" : {
-        "name" : "Difference frequency generation",
+    "wavelength-matching" : {
+        "name" : "(Optics) Wavelength matching",
+        "regime" : "solve",
         "description" : "Calculates wavelenghts in difference frequency generation process",
-        "function" : "1/(1/I[0] - 1/I[1])",
-        "inputs" : {
-            "l3 (lowest)" : {
+        "function" : "sympy.Eq(1/I[0], 1/I[1] + 1/I[2])",
+        "variables" : {
+            "a" : {
+                "name" : "l3",
                 "position" : 0,
                 "units" : [
                     "um",
                     "nm"
                 ]
             },
-            "l2" : {
+            "b" : {
+                "name" : "l1",
                 "position" : 1,
                 "units" : [
                     "um",
                     "nm"
                 ]
-            }            
-        },
-        "outputs" : {
-            "name" : "l1",
-            "units" : [
-                "um",
-                "nm"
-            ]
+            },
+            "c" : {
+                "name" : "l2",
+                "position" : 2,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            }           
         }
     }
 }

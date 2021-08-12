@@ -9,3 +9,4 @@ dependencies:
   - pint
   - ipython
   - uncertainties
+  - sympy
