@@ -78,7 +78,7 @@ class Calculator(ttk.Frame):
         ttk.Button(self.frame_main,text="Calculate",command=self.calculate).grid(row=101,column=0,columnspan=3,sticky="ew")
         self.result = tk.StringVar(value="Result")
         self.result_number = tk.StringVar()
-        ttk.Label(self.frame_main,textvariable=self.result,font=("Arial", 18)).grid(row=102,column=0,columnspan=3,sticky="ew")
+        ttk.Label(self.frame_main,textvariable=self.result,font=("Arial", 18),wraplength=280).grid(row=102,column=0,columnspan=3,sticky="ew")
         ttk.Entry(self.frame_main,textvariable=self.result_number).grid(row=103,column=0,columnspan=3,sticky="ew")
         self.frame_main.columnconfigure(1,weight=1)
         self.frame_main.grid(column=0,row=1)
@@ -87,16 +87,26 @@ class Calculator(ttk.Frame):
         fun = self.functions[self.functions_names.index(self.function_selected.get())]
         I = [None] * len(self.inputs_values)
         for ind,name in enumerate(self.settings[fun]["inputs"].keys()):
+            value = self.inputs_values[ind].get().replace(",",".")
             try:
-                I[self.settings[fun]["inputs"][name]["position"]] = float(self.inputs_values[ind].get().replace(",",".")) * self.ureg(self.inputs_units[ind].get())  
+                value = value.split("+-")
+                magnitude = value[0].strip()
+                if len(value) > 1:
+                    error = value[1].strip()     
+                else:
+                    error = 0           
+                I[self.settings[fun]["inputs"][name]["position"]] = (float(magnitude) * self.ureg(self.inputs_units[ind].get())).plus_minus(float(error)) 
             except ValueError:
                 self.result.set(value="Cannot convert to numbers!")
                 return 0
         function_to_evaluate = self.settings[fun]["function"]        
         try:
             result = eval(function_to_evaluate).to(self.output.get())
-            self.result.set(value="{} is {:.3f~P}".format(self.settings[fun]['outputs']['name'],result))
-            self.result_number.set(value=str(result.magnitude))
+            if result.error == 0:
+                self.result.set(value="{} is {:.3fP}".format(self.settings[fun]['outputs']['name'],result.value))
+            else: 
+                self.result.set(value="{} is {:.3fP}".format(self.settings[fun]['outputs']['name'],result))
+            self.result_number.set(value=str(result.value.magnitude))
         except ZeroDivisionError:
             self.result.set(value="Cannot divide by zero!")
             return 0
