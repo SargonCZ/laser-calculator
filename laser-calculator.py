@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 import json
 import sympy
+import copy
 
 class Calculator(ttk.Frame):    
     def __init__(self,master):
@@ -18,18 +19,22 @@ class Calculator(ttk.Frame):
 
         self.functions = list(self.settings.keys())
         self.functions_names = [self.settings[x]["name"] for x in self.functions]
-
+        functions_names_sorted = copy.deepcopy(self.functions_names)
+        functions_names_sorted.sort()
         frame_choose_function = ttk.Frame(self)
         ttk.Label(frame_choose_function,text="Choose a function:").grid(column=0,row=0,sticky="w")
         self.function_selected = tk.StringVar()
         self.function_dropdown = ttk.Combobox(frame_choose_function,textvariable=self.function_selected,width=30)
-        self.function_dropdown["values"] = self.functions_names
+        self.function_dropdown["values"] = functions_names_sorted
         self.function_dropdown.state(["readonly"])
         self.function_dropdown.grid(row=1,column=0,sticky="ew")
         self.function_dropdown.bind('<<ComboboxSelected>>', self.on_function_selected)
         frame_choose_function.columnconfigure(0,weight=1)
         frame_choose_function.grid(row=0,column=0,sticky="nsew")
-
+        instructions = "Choose a function to calculate or an equation to solve.\nIn calculation, all inputs must be filled. Unceratinty can be added for linear functions by +-.\nWhen solving, the variable for which you solve should be marked by x. "
+        self.frame_main = ttk.Frame(self)
+        ttk.Label(self.frame_main,text=instructions,wraplength=280,justify="left").grid(row=0,column=0,sticky="ew",columnspan=3)
+        self.frame_main.grid(column=0,row=1)
 
     def on_function_selected(self,event=None):
         try:
