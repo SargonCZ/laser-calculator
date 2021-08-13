@@ -73,7 +73,7 @@
     "wavelength-matching" : {
         "name" : "(Optics) Wavelength matching",
         "regime" : "solve",
-        "description" : "Calculates wavelenghts in difference frequency generation process",
+        "description" : "Solves wavelenghts in frequency matching.",
         "function" : "sympy.Eq(1/I[0], 1/I[1] + 1/I[2])",
         "variables" : {
             "a" : {
@@ -101,5 +101,91 @@
                 ]
             }           
         }
+    },
+    "beam-divergence" : {
+        "name" : "(Lasers) Beam divergence and quality",
+        "regime" : "solve",
+        "description" : "Solves the equation for the divergence of the laser beam.",
+        "function" : "sympy.Eq(I[0], I[1] * I[2]/(np.pi*I[3]))",
+        "variables" : {
+            "a" : {
+                "name" : "Divergence",
+                "position" : 0,
+                "units" : [
+                    "deg",
+                    "mrad",
+                    "urad"
+                ]
+            },
+            "b" : {
+                "name" : "M2",
+                "position" : 1,
+                "units" : [
+                ]
+            },
+            "c" : {
+                "name" : "Wavelength",
+                "position" : 2,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            },
+            "d" : {
+                "name" : "Diameter",
+                "position" : 3,
+                "units" : [
+                    "mm",
+                    "um"
+                ]
+            }              
+        }
+    },
+    "b-integral" : {
+        "name" : "(Lasers) Simplified B-integral",
+        "regime" : "calc",
+        "description" : "Calculates the simplified B-integral.",
+        "function" : "2*np.pi/I[0]*I[1]*I[2]*I[3]",
+        "inputs": {
+            "Wavelength" : {
+                "position" : 0,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            },
+            "n2" : {
+                "position" : 1,
+                "units" : [
+                    "m^2/W"
+                ]
+            },
+            "Peak intensity" : {
+                "position" : 2,
+                "units" : [
+                    "MW/cm^2",
+                    "GW/cm^2",
+                    "TW/cm^2"
+                ]
+            },
+            "Length" : {
+                "position" : 3,
+                "units" : [
+                    "um",
+                    "mm",
+                    "cm",
+                    "m"
+                ]
+            }
+        },
+        "outputs" : {
+            "name" : "B-integral",
+            "units" : [
+                "rad"
+            ]
+        },
+        "constants" : [
+            "n2"
+        ]
     }
 }

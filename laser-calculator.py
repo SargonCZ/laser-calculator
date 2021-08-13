@@ -14,6 +14,8 @@ class Calculator(ttk.Frame):
 
         with open('functions.json', 'r') as file:
             self.settings = json.load(file)
+        with open("constants.json","r") as file:
+            self.constants = json.load(file)
 
         self.ureg = pint.UnitRegistry()
 
@@ -38,8 +40,10 @@ class Calculator(ttk.Frame):
 
     def on_function_selected(self,event=None):
         try:
-            self.frame_main.grid_forget()
+            self.frame_main.grid_forget()            
             self.frame_main.destroy()
+            self.frame_tree.grid_forget()
+            self.frame_tree.destroy()
         except:
             pass
 
@@ -59,6 +63,26 @@ class Calculator(ttk.Frame):
             self.build_solve(fun)
         else:
             self.write("Something is wrong with the definition.")
+
+        # if constants, adding list of them
+        const = self.settings[fun].get("constants",None)
+        if const:
+            self.frame_tree = ttk.Frame(self)
+            tree = ttk.Treeview(self.frame_tree,columns=("name","value"))
+            tree.heading("#0",text="Constant")
+            tree.heading("name",text="Name")
+            tree.heading("value",text="Value")
+            tree.column('#0', width=70, anchor='w')
+            tree.column('name', minwidth=120, anchor='w')
+            tree.column('value', width=120, anchor='e')
+            for name in const:
+                tree.insert('','end',name,text=name)
+                tree.item(name,open=tk.TRUE)
+                for vals in self.constants[name].keys():
+                    tree.insert(name,'end',vals,values=(vals,self.constants[name][vals]))
+            tree.grid(column=1,row=1,sticky="nsew")
+            self.frame_tree.grid(column=1,row=0,rowspan=2,sticky="nsew")
+            self.frame_tree.rowconfigure(1,weight=1)
 
     def build_solve(self,fun):
         self.var_units = []

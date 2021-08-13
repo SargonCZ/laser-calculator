@@ -1,0 +1,10 @@
+{
+    "n2" : {
+        "air, 308 nm, 1 atm" : "1.22e-22 m^2/W",
+        "fused silica, 1030 nm" : "2.19e-20 m^2/W",
+        "calcium fluoride (CaF2)" : "1.71e-20 m^2/W",
+        "BBO, 532 nm" : "~8e-20 m^2/W",
+        "LBO, 850 nm" : "1.9e-20 m^2/W",
+        "YAG, 1064 nm" : "6.2e-20 m^2/W"     
+    }
+}
