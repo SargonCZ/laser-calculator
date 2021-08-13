@@ -73,8 +73,8 @@ class Calculator(ttk.Frame):
             tree.heading("name",text="Name")
             tree.heading("value",text="Value")
             tree.column('#0', width=70, anchor='w')
-            tree.column('name', minwidth=120, anchor='w')
-            tree.column('value', width=120, anchor='e')
+            tree.column('name', width=140, anchor='w')
+            tree.column('value', width=110, anchor='e')
             for name in const:
                 tree.insert('','end',name,text=name)
                 tree.item(name,open=tk.TRUE)

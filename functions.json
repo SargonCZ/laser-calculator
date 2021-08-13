@@ -142,7 +142,7 @@
         }
     },
     "b-integral" : {
-        "name" : "(Lasers) Simplified B-integral",
+        "name" : "(Nonlinear) Simplified B-integral",
         "regime" : "calc",
         "description" : "Calculates the simplified B-integral.",
         "function" : "2*np.pi/I[0]*I[1]*I[2]*I[3]",
@@ -187,5 +187,185 @@
         "constants" : [
             "n2"
         ]
+    },
+    "self-focusing" : {
+        "name" : "(Nonlinear) Self-focusing",
+        "regime" : "calc",
+        "description" : "Calculates the critical power for self-focusing of a Gaussian beam.",
+        "function" : "0.1509*I[0]**2/I[1]/I[2]",
+        "inputs": {
+            "Wavelength" : {
+                "position" : 0,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            },
+            "n" : {
+                "position" : 1,
+                "units" : [
+                ]
+            },
+            "n2" : {
+                "position" : 2,
+                "units" : [
+                    "m^2/W"
+                ]
+            }
+        },
+        "outputs" : {
+            "name" : "Critical power",
+            "units" : [
+                "MW",
+                "GW",
+                "TW"
+            ]
+        },
+        "constants" : [
+            "n2"
+        ]
+    },
+    "power-energy-duration" : {
+        "name" : "(Lasers) Peak power-energy-duration relation",
+        "regime" : "solve",
+        "description" : "Solves the power-energy-duration relation.",
+        "function" : "sympy.Eq(I[0], I[1] / I[2])",
+        "variables" : {
+            "a" : {
+                "name" : "Power",
+                "position" : 0,
+                "units" : [
+                    "TW",
+                    "GW",
+                    "MW",
+                    "kW",
+                    "W"
+                ]
+            },
+            "b" : {
+                "name" : "Energy",
+                "position" : 1,
+                "units" : [
+                    "J",
+                    "mJ",
+                    "uJ",
+                    "nJ"
+                ]
+            },
+            "c" : {
+                "name" : "Duration",
+                "position" : 2,
+                "units" : [
+                    "ns",
+                    "ps",
+                    "fs"
+                ]
+            }           
+        }
+    },
+    "power-energy-frequency" : {
+        "name" : "(Lasers) Average power-energy-frequency relation",
+        "regime" : "solve",
+        "description" : "Solves the power-energy-frequency relation.",
+        "function" : "sympy.Eq(I[0], I[1] * I[2])",
+        "variables" : {
+            "a" : {
+                "name" : "Power",
+                "position" : 0,
+                "units" : [
+                    "kW",
+                    "W",
+                    "mW"
+                ]
+            },
+            "b" : {
+                "name" : "Energy",
+                "position" : 1,
+                "units" : [
+                    "J",
+                    "mJ",
+                    "uJ",
+                    "nJ"
+                ]
+            },
+            "c" : {
+                "name" : "Frequency",
+                "position" : 2,
+                "units" : [
+                    "MHz",
+                    "kHz",
+                    "Hz"
+                ]
+            }           
+        }
+    },
+    "duration-bandwidth" : {
+        "name" : "(Lasers) Pulse length-bandwidth",
+        "regime" : "calc",
+        "description" : "Calculates the minimal pulse duration based on a spectral bandwidth.",
+        "function" : "I[2]*I[0]**2/(I[1]*299792458*self.ureg('m/s'))",
+        "inputs": {
+            "Wavelength" : {
+                "position" : 0,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            },
+            "Bandwidth" : {
+                "position" : 1,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            },
+            "TBP" : {
+                "position" : 2,
+                "units" : [
+                ]
+            }
+        },
+        "outputs" : {
+            "name" : "Pulse duration",
+            "units" : [
+                "ns",
+                "ps",
+                "fs"
+            ]
+        },
+        "constants" : [
+            "TBP"
+        ]
+    },
+    "peak-fluence" : {
+        "name" : "(Lasers) Peak fluence (Gaussian)",
+        "regime" : "calc",
+        "description" : "Calculates the peak fluence of  a Gaussian laser beam. The beam diameter follows the D4s definition.",
+        "function" : "2*I[0]/(np.pi*(I[1]/2)**2)",
+        "inputs": {
+            "Energy" : {
+                "position" : 0,
+                "units" : [
+                    "J",
+                    "mJ",
+                    "uJ"
+                ]
+            },
+            "Beam diameter" : {
+                "position" : 1,
+                "units" : [
+                    "mm",
+                    "um"
+                ]
+            }
+        },
+        "outputs" : {
+            "name" : "Fluence",
+            "units" : [
+                "J/cm^2",
+                "mJ/cm^2",
+                "uJ/cm^2"
+            ]
+        }
     }
 }
