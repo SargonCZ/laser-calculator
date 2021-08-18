@@ -5,8 +5,8 @@ channels:
 dependencies:
 # use specific Python version to avoid possible incompatibilities
   - python=3.8
-  - numpy
-  - pint
+  - numpy=1.21
+  - pint=0.17
   - ipython
-  - uncertainties
-  - sympy
+  - uncertainties=3.1
+  - sympy=1.8
