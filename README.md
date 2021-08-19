@@ -1,4 +1,4 @@
-# Laser and optics calculator
+# 🌠 Laser and optics calculator
 
 This is a simple calculator, which quickly allows one to calculate various functions and solve  equations common in the optics and laser community. The two main things I have focused on are:
 
@@ -7,10 +7,17 @@ This is a simple calculator, which quickly allows one to calculate various funct
 
 Additionally, when the calculated function is *linear*, one can add an uncertainty to the values, which will be propagated into the results.
 
+Nice online calculators, that can do similar stuff, are these:
+
+- [Optics toolbox](http://toolbox.lightcon.com) from Light conversion
+- [Laser calculator](https://lasercalculator.com) by Joona Rissanen 
+
+In contrast to those, however, you can quickly and simply add anything you need to this one 👍.
+
 ---
 
 ## Table of contents
-- [Laser and optics calculator](#laser-and-optics-calculator)
+- [🌠 Laser and optics calculator](#-laser-and-optics-calculator)
   - [Table of contents](#table-of-contents)
   - [Application usage](#application-usage)
     - [List of available function](#list-of-available-function)
@@ -109,6 +116,18 @@ If there are some constants associated with the functions, they will be displaye
 ![Showing associated constants](screenshots/b-integral.png)
 
 These constants can be easily changed or added, the process in described [in this section](#structure-of-the-constantsjson-file).
+
+### History
+
+History of calculations can be shown by clicking on the `Options` menu and then `Show history` button. 
+
+![Options menu](screenshots/options-menu.png)
+
+Alternatively, one can use `Ctrl+H` shortcut. The history will be shown in separate window with four columns, showing the date and time of calculation, the name of the function, inputs and outputs, as is demonstrated on the following picture:
+
+![History](screenshots/history.png)
+
+The history is saved in the `history.json` file and can be cleared by deleting the file or by clicking the `Clear history` button in the `Options` menu.
 
 ### Starting from `.bat` file with conda
 

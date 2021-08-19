@@ -5,19 +5,31 @@ from tkinter import ttk
 import json
 import sympy
 import copy
+import datetime
 
 class Calculator(ttk.Frame):    
     def __init__(self,master):
         ttk.Frame.__init__(self,master)
         self.master = master
         self.master.title("Laser calculator")
+        self.master.option_add("*tearOff", tk.FALSE)
+        self.master.protocol("WM_DELETE_WINDOW", self.on_closing)      
 
         with open('functions.json', 'r') as file:
             self.settings = json.load(file)
         with open("constants.json","r") as file:
             self.constants = json.load(file)
+        try:
+            with open('history.json', 'r') as file:
+                self.history = json.load(file)
+        except FileNotFoundError:
+            self.history = dict()
 
         self.ureg = pint.UnitRegistry()
+
+        self.p_history = tk.PhotoImage(master=self,file=r"icons/log.png")
+        self.p_clear = tk.PhotoImage(master=self,file=r"icons/delete.png")
+        self.p_calc = tk.PhotoImage(master=self,file=r"icons/calc.png")
 
         self.functions = list(self.settings.keys())
         self.functions_names = [self.settings[x]["name"] for x in self.functions]
@@ -38,10 +50,79 @@ class Calculator(ttk.Frame):
         ttk.Label(self.frame_main,text=instructions,wraplength=280,justify="left").grid(row=0,column=0,sticky="ew",columnspan=3)
         self.frame_main.grid(column=0,row=1)
 
+        self.menubar = tk.Menu(self.master)
+        self.master["menu"] = self.menubar
+        self.menu_options = tk.Menu(self.menubar)
+        self.menubar.add_cascade(menu=self.menu_options,label="Options")
+        self.menu_options.add_command(label="Show history",command=self.show_history,image=self.p_history,compound=tk.LEFT,accelerator="Ctrl+H")
+        self.menu_options.add_command(label="Clear history",command=self.clear_history,image=self.p_clear,compound=tk.LEFT)
+        self.history_window_open = False
+
+        self.bind_all("<Control-KeyPress-h>",self.show_history)
+
+    def on_closing(self):
+        with open('history.json', 'w') as file:
+            json.dump(self.history,file,sort_keys=True, indent=4)
+        self.master.destroy()
+
+    def show_history(self,event=None):
+        try:
+            self.history_window.destroy()
+            self.history_window_open = False
+        except:
+            pass
+        self.history_window = tk.Toplevel(self.master)
+        self.history_window.title("History")
+        self.history_window.protocol("WM_DELETE_WINDOW", self.close_history)        
+        
+        self.history_tree = ttk.Treeview(self.history_window,columns=("function","inputs","outputs"))
+        self.history_tree.heading("#0",text="Time")
+        self.history_tree.heading("function",text="Function")
+        self.history_tree.heading("inputs",text="Inputs")
+        self.history_tree.heading("outputs",text="Output")
+        self.history_tree.column("#0",stretch=False,width=150)
+        self.history_tree.column("function",stretch=False,width=200)
+        self.history_tree.column("inputs",stretch=True,width=350)
+        self.history_tree.column("outputs",stretch=True,width=350)        
+        self.history_tree.grid(column=1,row=1,sticky="nsew")
+        scrlbar = ttk.Scrollbar(self.history_window,command=self.history_tree.yview)
+        self.history_tree.config(yscrollcommand = scrlbar.set)
+        scrlbar.grid(column=2,row=1,sticky="nsew")
+        self.history_window.columnconfigure(1,weight=1)
+        self.history_window.rowconfigure(1,weight=1)
+        self.history_window_open = True
+        for key in self.history.keys():
+            self.history_tree.insert("",0,text=key,values=self.history[key])
+    
+    def close_history(self):
+        self.history_window_open = False
+        self.history_window.destroy()
+
+    def add_history(self,what=()):
+        now = datetime.datetime.now().isoformat(sep=" ",timespec="seconds")
+        self.history[str(now)] = what 
+        if self.history_window_open:
+            self.history_tree.insert("",0,text=now,values=what)
+
+    def clear_history(self):
+        self.history = dict()
+        if self.history_window_open:
+            for children in self.history_tree.get_children():
+                self.history_tree.delete(children)
+
     def on_function_selected(self,event=None):
+        '''Called, when a function is selected
+        Will clear the GUI of the controlling elements of the last function
+        and will build a new one. Depending on the calculation regime, 
+        it will call either build_calc or build_solve function. Finally,
+        it will create a view for the constants.
+        '''
         try:
             self.frame_main.grid_forget()            
             self.frame_main.destroy()
+        except:
+            pass
+        try:
             self.frame_tree.grid_forget()
             self.frame_tree.destroy()
         except:
@@ -81,8 +162,12 @@ class Calculator(ttk.Frame):
                 for vals in self.constants[name].keys():
                     tree.insert(name,'end',vals,values=(vals,self.constants[name][vals]))
             tree.grid(column=1,row=1,sticky="nsew")
+            scrlbar = ttk.Scrollbar(self.frame_tree,command=tree.yview)
+            tree.config(yscrollcommand = scrlbar.set)
+            scrlbar.grid(column=2,row=1,sticky="nsew")
             self.frame_tree.grid(column=1,row=0,rowspan=2,sticky="nsew")
             self.frame_tree.rowconfigure(1,weight=1)
+            
 
     def build_solve(self,fun):
         self.var_units = []
@@ -102,7 +187,7 @@ class Calculator(ttk.Frame):
             self.var_CB[ind].state(["readonly"])
             self.var_CB[ind].grid(row=2+ind,column=2,sticky="e")
         
-        ttk.Button(self.frame_main,text="Solve",command=self.calculate_btn).grid(row=101,column=0,columnspan=3,sticky="ew")
+        ttk.Button(self.frame_main,text="Solve",command=self.calculate_btn,image=self.p_calc,compound=tk.LEFT).grid(row=101,column=0,columnspan=3,sticky="ew")
         self.result = tk.StringVar(value="Result")
         self.result_number = tk.StringVar()
         ttk.Label(self.frame_main,textvariable=self.result,font=("Arial", 18),wraplength=280).grid(row=102,column=0,columnspan=3,sticky="ew")
@@ -140,7 +225,7 @@ class Calculator(ttk.Frame):
         self.output_CB.state(["readonly"])
         self.output_CB.grid(row=100,column=2,sticky="e")
 
-        ttk.Button(self.frame_main,text="Calculate",command=self.calculate_btn).grid(row=101,column=0,columnspan=3,sticky="ew")
+        ttk.Button(self.frame_main,text="Calculate",command=self.calculate_btn,image=self.p_calc,compound=tk.LEFT).grid(row=101,column=0,columnspan=3,sticky="ew")
         self.result = tk.StringVar(value="Result")
         self.result_number = tk.StringVar()
         ttk.Label(self.frame_main,textvariable=self.result,font=("Arial", 18),wraplength=280).grid(row=102,column=0,columnspan=3,sticky="ew")
@@ -161,6 +246,7 @@ class Calculator(ttk.Frame):
         found_x = False
         I = [None] * len(self.var_values)
         str_to_eval = [None] * len(self.var_values)
+        inputs = ""
         # Deciding, what to solve
         for ind,name in enumerate(self.settings[fun]["variables"].keys()):
             I[ind] = sympy.symbols(name)
@@ -175,6 +261,7 @@ class Calculator(ttk.Frame):
                     return 0
             else:
                 str_to_eval[ind] = "{0} = float(self.var_values[{1}].get().replace(',','.')) * self.ureg(self.var_units[{1}].get())".format(name,ind)
+                inputs = inputs + f"{self.settings[fun]['variables'][name]['name']} = {self.var_values[ind].get().replace(',','.')} {self.var_units[ind].get()}, "
         if not found_x:
             self.write("One x required.")
             return 0
@@ -193,6 +280,7 @@ class Calculator(ttk.Frame):
             result = eval(solution).to(resulting_units)
             self.result.set(value="{} is {:.3fP}".format(resulting_name,result))
             self.result_number.set(value=str(result.magnitude))
+            self.add_history((self.settings[fun]["name"],inputs[0:-2],f"{resulting_name} = {str(result)}"))
         except ZeroDivisionError:
             self.write("Cannot divide by zero!")
             return 0
@@ -200,6 +288,7 @@ class Calculator(ttk.Frame):
 
     def calculate(self,fun):
         I = [None] * len(self.inputs_values)
+        inputs = ""
         for ind,name in enumerate(self.settings[fun]["inputs"].keys()):
             value = self.inputs_values[ind].get().replace(",",".")
             try:
@@ -211,6 +300,7 @@ class Calculator(ttk.Frame):
                 else:
                     error = 0           
                     I[self.settings[fun]["inputs"][name]["position"]] = (float(magnitude) * self.ureg(self.inputs_units[ind].get())) 
+                inputs = inputs + f"{name} = {self.inputs_values[ind].get().replace(',','.')} {self.inputs_units[ind].get()}, "
             except ValueError:
                 self.write("Cannot convert to numbers!")
                 return 0
@@ -219,6 +309,7 @@ class Calculator(ttk.Frame):
             result = eval(function_to_evaluate).to(self.output.get())
             self.result.set(value="{} is {:.3fP}".format(self.settings[fun]['outputs']['name'],result))
             self.result_number.set(value=str(result.magnitude))
+            self.add_history((self.settings[fun]["name"],inputs[0:-2],f"{self.settings[fun]['outputs']['name']} = {str(result)}"))
         except ZeroDivisionError:
             self.write("Cannot divide by zero!")
             return 0
