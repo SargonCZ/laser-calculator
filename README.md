@@ -5,7 +5,7 @@ This is a simple calculator, which quickly allows one to calculate various funct
 1. **Units** - all the calculations are working with the physical units that can be chosen by the users.
 2. **Extendibility** - it is relatively simple to add a new function, change the available one, add allowed units and so on.
 
-Additionally, when the calculated function is *linear*, one can add an uncertainty to the values, which will be propagated into the results.
+Additionally, when the calculated or solved function is *linear*, one can add an uncertainty to the values, which will be propagated into the results.
 
 Nice online calculators, that can do similar stuff, are these:
 
@@ -47,7 +47,8 @@ In contrast to those, however, you can quickly and simply add anything you need 
 - Peak fluence (calc)
 - Peak intensity (calc)
 - Peak power-energy-duration relation (solve)
-- Pulse length-bandwidth relation (calc)
+- Pulse length-bandwidth relation (solve)
+- Frequency-wavelength conversion (solve)
 - Critical power for self-focusing (calc)
 - Simplified B-integral (calc)
 - Snell's law (calc)
@@ -109,6 +110,7 @@ This works only for linear function (meaning no `sin` and similar):
 - Peak intensity
 - Peak power-energy-duration relation
 - Pulse length-bandwidth relation
+- Frequency-wavelength conversion
 - Critical power for self-focusing (but it doesn't really make sense here)
 - Simplified B-integral
 - Spot size
@@ -211,43 +213,56 @@ The `functions.json` file consists of a dictionary of definitions similar to the
 If the regime of the calculation is `"solve"`, following changes take place:
 
 - `"function"` definition is now an equation in the form of `"sympy.Eq(` + left-hand side + `,` + right-hand side + `)"`. 
-- `"variables"` - all variables used in the function definition are listed under the `"variables"` keys, and `"inputs"` and `"output"` keys are missing. Every variable has an associated name, position (corresponding to the index `ind`) and units.
+- `"variables"` - all variables used in the function definition are listed under the `"variables"` keys, and `"inputs"` and `"output"` keys are missing. Every variable has an associated name, position (corresponding to the index `ind`) and units. If there is some constant with units in the equation, it can be added as an additional variable with it's value filled in, as is done in the following example (the last variable, speed of light).
 
-Simplified example is shown here:
 ```json
-        "function" : "sympy.Eq(I[0], I[1] * I[2])",
-        "variables" : {
+        "function" : "sympy.Eq(I[3],I[2]*I[0]**2/(I[1]*I[4]))",
+        "variables": {
             "a" : {
-                "name" : "Power",
+                "name" : "Wavelength",
                 "position" : 0,
                 "units" : [
-                    "kW",
-                    "W",
-                    "mW"
+                    "um",
+                    "nm"
                 ]
             },
             "b" : {
-                "name" : "Energy",
+                "name" : "Bandwidth",
                 "position" : 1,
                 "units" : [
-                    "J",
-                    "mJ",
-                    "uJ",
-                    "nJ"
+                    "um",
+                    "nm"
                 ]
             },
             "c" : {
-                "name" : "Frequency",
+                "name" : "TBP",
                 "position" : 2,
                 "units" : [
-                    "MHz",
-                    "kHz",
-                    "Hz"
                 ]
-            }           
+            },
+            "d" : {
+                "name" : "Pulse duration",
+                "position" : 3,
+                "units" : [
+                    "ns",
+                    "ps",
+                    "fs"
+                ]
+            },
+            "e" : {
+                "name" : "c",
+                "position" : 2,
+                "units" : [
+                    "m/s"
+                ],
+                "value" : 299792458
+            }  
+        },       
 ```
 
-At the moment, having constants with units doesn't work in the `solve` regime.
+In the program, this last variable will be shown, but it will be in `readonly` or `disabled` state, like it is shown in the next figure:
+
+![Variable in solve regime](screenshots/bandwidth.png)
 
 ### Structure of the `constants.json` file
 

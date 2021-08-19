@@ -174,9 +174,17 @@ class Calculator(ttk.Frame):
         self.var_values = []
         self.var_CB = []
         for ind,name in enumerate(self.settings[fun]["variables"].keys()):
+            uneditable = False
             ttk.Label(self.frame_main,text=self.settings[fun]["variables"][name]["name"]).grid(row=2+ind,column=0,sticky="w")
-            self.var_values.append(tk.StringVar(value=0))
-            ttk.Entry(self.frame_main,textvariable=self.var_values[ind]).grid(row=2+ind,column=1,sticky="ew")
+            try:
+                self.var_values.append(tk.StringVar(value=self.settings[fun]["variables"][name]["value"]))
+                uneditable = True
+            except KeyError:
+                self.var_values.append(tk.StringVar(value=0))
+            current_Entry = ttk.Entry(self.frame_main,textvariable=self.var_values[ind])
+            if uneditable:
+                current_Entry.config(state="disabled")
+            current_Entry.grid(row=2+ind,column=1,sticky="ew")
             self.var_units.append(tk.StringVar())
             try: 
                 self.var_units[ind].set(value=self.settings[fun]["variables"][name]["units"][0])
@@ -184,7 +192,10 @@ class Calculator(ttk.Frame):
                 pass
             self.var_CB.append(ttk.Combobox(self.frame_main,textvariable=self.var_units[ind],width=10))
             self.var_CB[ind]["values"] = self.settings[fun]["variables"][name]["units"]
-            self.var_CB[ind].state(["readonly"])
+            if uneditable:
+                self.var_CB[ind].state(["disabled"])
+            else:
+                self.var_CB[ind].state(["readonly"])
             self.var_CB[ind].grid(row=2+ind,column=2,sticky="e")
         
         ttk.Button(self.frame_main,text="Solve",command=self.calculate_btn,image=self.p_calc,compound=tk.LEFT).grid(row=101,column=0,columnspan=3,sticky="ew")

@@ -301,37 +301,49 @@
     },
     "duration-bandwidth" : {
         "name" : "(Lasers) Pulse length-bandwidth",
-        "regime" : "calc",
-        "description" : "Calculates the minimal pulse duration based on a spectral bandwidth.",
-        "function" : "I[2]*I[0]**2/(I[1]*299792458*self.ureg('m/s'))",
-        "inputs": {
-            "Wavelength" : {
+        "regime" : "solve",
+        "description" : "Solves the minimal pulse duration based on a spectral bandwidth.",
+        "function" : "sympy.Eq(I[3],I[2]*I[0]**2/(I[1]*I[4]))",
+        "variables": {
+            "a" : {
+                "name" : "Wavelength",
                 "position" : 0,
                 "units" : [
                     "um",
                     "nm"
                 ]
             },
-            "Bandwidth" : {
+            "b" : {
+                "name" : "Bandwidth",
                 "position" : 1,
                 "units" : [
                     "um",
                     "nm"
                 ]
             },
-            "TBP" : {
+            "c" : {
+                "name" : "TBP",
                 "position" : 2,
                 "units" : [
                 ]
-            }
-        },
-        "outputs" : {
-            "name" : "Pulse duration",
-            "units" : [
-                "ns",
-                "ps",
-                "fs"
-            ]
+            },
+            "d" : {
+                "name" : "Pulse duration",
+                "position" : 3,
+                "units" : [
+                    "ns",
+                    "ps",
+                    "fs"
+                ]
+            },
+            "e" : {
+                "name" : "c",
+                "position" : 2,
+                "units" : [
+                    "m/s"
+                ],
+                "value" : 299792458
+            }  
         },
         "constants" : [
             "TBP"
@@ -407,6 +419,39 @@
                 "um",
                 "mm"
             ]
+        }
+    },
+    "wavelength-frequency" : {
+        "name" : "(Lasers) Wavelength-frequency conversion",
+        "regime" : "solve",
+        "description" : "Converts between the wavelength and frequency.",
+        "function" : "sympy.Eq(I[0], I[2] / I[1])",
+        "variables" : {
+            "a" : {
+                "name" : "Wavelength",
+                "position" : 0,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            },
+            "b" : {
+                "name" : "Frequency",
+                "position" : 1,
+                "units" : [
+                    "THz",
+                    "GHz",
+                    "MHz"
+                ]
+            },
+            "c" : {
+                "name" : "c",
+                "position" : 2,
+                "units" : [
+                    "m/s"
+                ],
+                "value" : 299792458
+            }           
         }
     }
 }
