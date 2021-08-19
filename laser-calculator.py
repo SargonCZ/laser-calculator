@@ -7,14 +7,24 @@ import sympy
 import copy
 import datetime
 
+
+
 class Calculator(ttk.Frame):    
+    '''
+    There is one class (this one) representing the whole application
+    '''
     def __init__(self,master):
+        '''
+        This is the constructor. It creates the GUI window, loads the functions, constants and history, and prepares the selection of the function to be calculated.
+        '''
+        # Building the window
         ttk.Frame.__init__(self,master)
         self.master = master
         self.master.title("Laser calculator")
         self.master.option_add("*tearOff", tk.FALSE)
         self.master.protocol("WM_DELETE_WINDOW", self.on_closing)      
 
+        # Loading everything
         with open('functions.json', 'r') as file:
             self.settings = json.load(file)
         with open("constants.json","r") as file:
@@ -24,13 +34,12 @@ class Calculator(ttk.Frame):
                 self.history = json.load(file)
         except FileNotFoundError:
             self.history = dict()
-
-        self.ureg = pint.UnitRegistry()
-
         self.p_history = tk.PhotoImage(master=self,file=r"icons/log.png")
         self.p_clear = tk.PhotoImage(master=self,file=r"icons/delete.png")
         self.p_calc = tk.PhotoImage(master=self,file=r"icons/calc.png")
+        self.ureg = pint.UnitRegistry()
 
+        # Creating function selection
         self.functions = list(self.settings.keys())
         self.functions_names = [self.settings[x]["name"] for x in self.functions]
         functions_names_sorted = copy.deepcopy(self.functions_names)
@@ -50,6 +59,7 @@ class Calculator(ttk.Frame):
         ttk.Label(self.frame_main,text=instructions,wraplength=280,justify="left").grid(row=0,column=0,sticky="ew",columnspan=3)
         self.frame_main.grid(column=0,row=1)
 
+        # Creating menu and history
         self.menubar = tk.Menu(self.master)
         self.master["menu"] = self.menubar
         self.menu_options = tk.Menu(self.menubar)
@@ -57,15 +67,21 @@ class Calculator(ttk.Frame):
         self.menu_options.add_command(label="Show history",command=self.show_history,image=self.p_history,compound=tk.LEFT,accelerator="Ctrl+H")
         self.menu_options.add_command(label="Clear history",command=self.clear_history,image=self.p_clear,compound=tk.LEFT)
         self.history_window_open = False
-
         self.bind_all("<Control-KeyPress-h>",self.show_history)
 
     def on_closing(self):
+        '''
+        On closing of the program, history is saved
+        '''
         with open('history.json', 'w') as file:
             json.dump(self.history,file,sort_keys=True, indent=4)
         self.master.destroy()
 
     def show_history(self,event=None):
+        '''
+        Creates a window showing the history
+        '''
+        # Destroy previous window, if possible, and then create a new one
         try:
             self.history_window.destroy()
             self.history_window_open = False
@@ -75,6 +91,7 @@ class Calculator(ttk.Frame):
         self.history_window.title("History")
         self.history_window.protocol("WM_DELETE_WINDOW", self.close_history)        
         
+        # Configure the Treeview widget, where the history is shown
         self.history_tree = ttk.Treeview(self.history_window,columns=("function","inputs","outputs"))
         self.history_tree.heading("#0",text="Time")
         self.history_tree.heading("function",text="Function")
@@ -91,32 +108,41 @@ class Calculator(ttk.Frame):
         self.history_window.columnconfigure(1,weight=1)
         self.history_window.rowconfigure(1,weight=1)
         self.history_window_open = True
+
+        # Insert the values
         for key in self.history.keys():
             self.history_tree.insert("",0,text=key,values=self.history[key])
     
     def close_history(self):
+        '''
+        When closing the window with history, you have to know about it
+        '''
         self.history_window_open = False
         self.history_window.destroy()
 
     def add_history(self,what=()):
+        '''
+        Add new historical record, with key being date and time and value being tuple of function, inputs and outputs
+        '''
         now = datetime.datetime.now().isoformat(sep=" ",timespec="seconds")
         self.history[str(now)] = what 
         if self.history_window_open:
             self.history_tree.insert("",0,text=now,values=what)
 
     def clear_history(self):
+        '''
+        Clears the history
+        '''
         self.history = dict()
         if self.history_window_open:
             for children in self.history_tree.get_children():
                 self.history_tree.delete(children)
 
     def on_function_selected(self,event=None):
-        '''Called, when a function is selected
-        Will clear the GUI of the controlling elements of the last function
-        and will build a new one. Depending on the calculation regime, 
-        it will call either build_calc or build_solve function. Finally,
-        it will create a view for the constants.
         '''
+        Called, when a function is selected, and will built the GUI of the program with the help of two other function, depending on the calculation regime. It will also create the view for the constants.
+        '''
+        # Get rid of previous GUI elements
         try:
             self.frame_main.grid_forget()            
             self.frame_main.destroy()
@@ -128,8 +154,8 @@ class Calculator(ttk.Frame):
         except:
             pass
 
+        # Show the description and formula
         fun = self.functions[self.functions_names.index(self.function_selected.get())]
-
         self.frame_main = ttk.Frame(self)
         ttk.Label(self.frame_main,text=self.settings[fun]["description"],wraplength=280,justify="left").grid(row=0,column=0,sticky="ew",columnspan=3)
         try:
@@ -138,6 +164,7 @@ class Calculator(ttk.Frame):
         except:
             pass
         
+        # Call the respective building functions
         if self.settings[fun]["regime"] == "calc":
             self.build_calc(fun)
         elif self.settings[fun]["regime"] == "solve":
@@ -145,7 +172,7 @@ class Calculator(ttk.Frame):
         else:
             self.write("Something is wrong with the definition.")
 
-        # if constants, adding list of them
+        # If there are constants, show the list of them
         const = self.settings[fun].get("constants",None)
         if const:
             self.frame_tree = ttk.Frame(self)
@@ -170,12 +197,17 @@ class Calculator(ttk.Frame):
             
 
     def build_solve(self,fun):
+        '''
+        Create the GUI, when the regime is for solving
+        '''
+        # Three lists for saving the selected units, values and to reference the comboboxes
         self.var_units = []
         self.var_values = []
         self.var_CB = []
         for ind,name in enumerate(self.settings[fun]["variables"].keys()):
-            uneditable = False
+            uneditable = False 
             ttk.Label(self.frame_main,text=self.settings[fun]["variables"][name]["name"]).grid(row=2+ind,column=0,sticky="w")
+            # every variable is editable, except for constants, which have asigned value
             try:
                 self.var_values.append(tk.StringVar(value=self.settings[fun]["variables"][name]["value"]))
                 uneditable = True
@@ -186,6 +218,7 @@ class Calculator(ttk.Frame):
                 current_Entry.config(state="disabled")
             current_Entry.grid(row=2+ind,column=1,sticky="ew")
             self.var_units.append(tk.StringVar())
+            # Some variables don't have units
             try: 
                 self.var_units[ind].set(value=self.settings[fun]["variables"][name]["units"][0])
             except:
@@ -208,6 +241,11 @@ class Calculator(ttk.Frame):
 
 
     def build_calc(self,fun):
+        '''
+        Create the GUI, when the regime is for calculation.
+        You don't care about constants in this regime
+        '''
+        # Three lists for saving the selected units, values and to reference the comboboxes of inputs
         self.inputs_units = []
         self.inputs_values = []
         self.inputs_CB = []
@@ -216,6 +254,7 @@ class Calculator(ttk.Frame):
             self.inputs_values.append(tk.StringVar(value=0))
             ttk.Entry(self.frame_main,textvariable=self.inputs_values[ind]).grid(row=2+ind,column=1,sticky="ew")
             self.inputs_units.append(tk.StringVar())
+            # Some variables don't have units
             try: 
                 self.inputs_units[ind].set(value=self.settings[fun]["inputs"][name]["units"][0])
             except:
@@ -225,6 +264,7 @@ class Calculator(ttk.Frame):
             self.inputs_CB[ind].state(["readonly"])
             self.inputs_CB[ind].grid(row=2+ind,column=2,sticky="e")
         
+        # Output is different, there is no Entry for it
         ttk.Label(self.frame_main,text=f"Units of output ({self.settings[fun]['outputs']['name']})").grid(row=100,column=0,sticky="ew",columnspan=2)
         self.output = tk.StringVar()        
         try:
@@ -245,6 +285,9 @@ class Calculator(ttk.Frame):
         self.frame_main.grid(column=0,row=1)
 
     def calculate_btn(self):
+        '''
+        Is called after the user clicks on the button, and based on the regime, calls the appropriate calculate or solve function
+        '''
         fun = self.functions[self.functions_names.index(self.function_selected.get())]
         if self.settings[fun]["regime"] == "calc":
             self.calculate(fun)
@@ -254,10 +297,14 @@ class Calculator(ttk.Frame):
             self.write("Something is wrong with the definition.")
     
     def solve(self,fun):
+        '''
+        Is called in the solving regime, when the user filled the input values and wants to know the results
+        '''
         found_x = False
-        I = [None] * len(self.var_values)
-        str_to_eval = [None] * len(self.var_values)
-        inputs = ""
+        I = [None] * len(self.var_values) # Symbols, which will eventually appear as variables in the solved function
+        str_to_eval = [None] * len(self.var_values) # This will assign values to the symbols
+        inputs = "" # This is string to add to history
+
         # Deciding, what to solve
         for ind,name in enumerate(self.settings[fun]["variables"].keys()):
             I[ind] = sympy.symbols(name)
@@ -274,7 +321,7 @@ class Calculator(ttk.Frame):
             else:
                 value = value.split("+-")
                 magnitude = value[0].strip()
-                if len(value) > 1:
+                if len(value) > 1: # If there is uncertainty
                     error = value[1].strip()
                     str_to_eval[ind] = "{} = (float({}) * self.ureg(self.var_units[{}].get())).plus_minus(float({}))".format(name,magnitude,ind,error)
                 else:
@@ -283,8 +330,11 @@ class Calculator(ttk.Frame):
         if not found_x:
             self.write("One x required.")
             return 0
+
+        # Get the resulting equation for x as a string, where variables are letters (a,b,...)
         solution = sympy.solve(eval(self.settings[fun]["function"]),x)
         solution = str(solution[0])
+
         # Creating variables for the solution
         for string in str_to_eval:
             try: 
@@ -293,7 +343,8 @@ class Calculator(ttk.Frame):
             except ValueError:
                 self.write("Cannot convert to numbers!")
                 return 0
-        # Solving
+
+        # Solving and printing the result
         try:
             result = eval(solution).to(resulting_units)
             self.result.set(value="{} is {:.3fP}".format(resulting_name,result))
@@ -305,14 +356,17 @@ class Calculator(ttk.Frame):
 
 
     def calculate(self,fun):
-        I = [None] * len(self.inputs_values)
-        inputs = ""
+        '''
+        Is called in the solving regime, when the user filled the input values and wants to know the results
+        '''
+        I = [None] * len(self.inputs_values) # These will be the quantities with uncertainties and units
+        inputs = "" # This is string to add to history
         for ind,name in enumerate(self.settings[fun]["inputs"].keys()):
             value = self.inputs_values[ind].get().replace(",",".")
             try:
                 value = value.split("+-")
                 magnitude = value[0].strip()
-                if len(value) > 1:
+                if len(value) > 1: # If there is uncertainty
                     error = value[1].strip()     
                     I[self.settings[fun]["inputs"][name]["position"]] = (float(magnitude) * self.ureg(self.inputs_units[ind].get())).plus_minus(float(error)) 
                 else:                            
@@ -321,6 +375,8 @@ class Calculator(ttk.Frame):
             except ValueError:
                 self.write("Cannot convert to numbers!")
                 return 0
+        
+        # Solving and printing the results
         function_to_evaluate = self.settings[fun]["function"]        
         try:
             result = eval(function_to_evaluate).to(self.output.get())
@@ -335,10 +391,13 @@ class Calculator(ttk.Frame):
             return 0
 
     def write(self,message="Result"):
+        '''
+        Function, which writes the message into both the results label and results entry
+        '''
         self.result.set(value=str(message))
         self.result_number.set(value=str(message))
 
-if __name__ == "__main__":
+if __name__ == "__main__": # If startes as a script/application and not loaded as a package
     root = tk.Tk()
     app = Calculator(root)
     app.grid(column=0,row=0)
