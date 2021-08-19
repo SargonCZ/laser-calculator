@@ -45,7 +45,7 @@ class Calculator(ttk.Frame):
         self.function_dropdown.bind('<<ComboboxSelected>>', self.on_function_selected)
         frame_choose_function.columnconfigure(0,weight=1)
         frame_choose_function.grid(row=0,column=0,sticky="nsew")
-        instructions = "Choose a function to calculate or an equation to solve.\nIn calculation, all inputs must be filled. Unceratinty can be added for linear functions by +-.\nWhen solving, the variable for which you solve should be marked by x. "
+        instructions = "Choose a function to calculate or an equation to solve.\nIn calculation, all inputs must be filled.\nWhen solving, the variable for which you solve should be marked by x.\nUnceratinty can be added for linear functions by +-."
         self.frame_main = ttk.Frame(self)
         ttk.Label(self.frame_main,text=instructions,wraplength=280,justify="left").grid(row=0,column=0,sticky="ew",columnspan=3)
         self.frame_main.grid(column=0,row=1)
@@ -250,7 +250,8 @@ class Calculator(ttk.Frame):
         # Deciding, what to solve
         for ind,name in enumerate(self.settings[fun]["variables"].keys()):
             I[ind] = sympy.symbols(name)
-            if self.var_values[ind].get().strip() == "x":
+            value = self.var_values[ind].get().strip().replace(",",".")
+            if value == "x":
                 if found_x == False:
                     x = I[ind]
                     resulting_units = self.var_units[ind].get()
@@ -260,7 +261,13 @@ class Calculator(ttk.Frame):
                     self.write("Too many x's.")
                     return 0
             else:
-                str_to_eval[ind] = "{0} = float(self.var_values[{1}].get().replace(',','.')) * self.ureg(self.var_units[{1}].get())".format(name,ind)
+                value = value.split("+-")
+                magnitude = value[0].strip()
+                if len(value) > 1:
+                    error = value[1].strip()
+                    str_to_eval[ind] = "{} = (float({}) * self.ureg(self.var_units[{}].get())).plus_minus(float({}))".format(name,magnitude,ind,error)
+                else:
+                    str_to_eval[ind] = "{} = float({}) * self.ureg(self.var_units[{}].get())".format(name,magnitude,ind)
                 inputs = inputs + f"{self.settings[fun]['variables'][name]['name']} = {self.var_values[ind].get().replace(',','.')} {self.var_units[ind].get()}, "
         if not found_x:
             self.write("One x required.")
@@ -297,8 +304,7 @@ class Calculator(ttk.Frame):
                 if len(value) > 1:
                     error = value[1].strip()     
                     I[self.settings[fun]["inputs"][name]["position"]] = (float(magnitude) * self.ureg(self.inputs_units[ind].get())).plus_minus(float(error)) 
-                else:
-                    error = 0           
+                else:                            
                     I[self.settings[fun]["inputs"][name]["position"]] = (float(magnitude) * self.ureg(self.inputs_units[ind].get())) 
                 inputs = inputs + f"{name} = {self.inputs_values[ind].get().replace(',','.')} {self.inputs_units[ind].get()}, "
             except ValueError:

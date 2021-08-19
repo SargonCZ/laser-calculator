@@ -27,6 +27,7 @@ In contrast to those, however, you can quickly and simply add anything you need 
       - [Solve equation regime](#solve-equation-regime)
     - [Using uncertainties](#using-uncertainties)
     - [Constants in the function](#constants-in-the-function)
+    - [History](#history)
     - [Starting from `.bat` file with conda](#starting-from-bat-file-with-conda)
   - [Adding new functions](#adding-new-functions)
     - [Structure of the `functions.json` file](#structure-of-the-functionsjson-file)
@@ -101,13 +102,17 @@ If you have a measured quantity with an uncertainty, you can add this error afte
 
 ![Peak intensity with uncertainty](screenshots/peak-intensity-uncertainty.png)
 
-This currently works only for functions in the *calculate regime*, which are linear (meaning no `sin` and similar):
+This works only for linear function (meaning no `sin` and similar):
+- Average power-energy-frequency relation
+- Beam divergence and quality
 - Peak fluence
 - Peak intensity
+- Peak power-energy-duration relation
 - Pulse length-bandwidth relation
 - Critical power for self-focusing (but it doesn't really make sense here)
 - Simplified B-integral
 - Spot size
+- Wavelength matching
 
 ### Constants in the function
 
