@@ -43,6 +43,7 @@ Additionally, when the calculated function is *linear*, one can add an uncertain
 - Critical power for self-focusing (calc)
 - Simplified B-integral (calc)
 - Snell's law (calc)
+- Spot size after lens (calc)
 - Wavelength matching (solve)
 
 New functions can be easily added by following the section [Adding new functions](#adding-new-functions).
@@ -99,6 +100,7 @@ This currently works only for functions in the *calculate regime*, which are lin
 - Pulse length-bandwidth relation
 - Critical power for self-focusing (but it doesn't really make sense here)
 - Simplified B-integral
+- Spot size
 
 ### Constants in the function
 

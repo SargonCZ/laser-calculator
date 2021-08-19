@@ -367,5 +367,46 @@
                 "uJ/cm^2"
             ]
         }
+    },
+    "spot-size" : {
+        "name" : "(Optics) Spot size",
+        "regime" : "calc",
+        "description" : "Calculates the spot diameter of a collimated Gaussian beam focused by a lens. Both diameters are by D4s definition.",
+        "function" : "4*I[1]*I[0]*I[2]/(np.pi*I[3])",
+        "inputs": {
+            "Wavelength" : {
+                "position" : 0,
+                "units" : [
+                    "um",
+                    "nm"
+                ]
+            },
+            "Beam quality" : {
+                "position" : 1,
+                "units" : [
+                ]
+            },
+            "Focal length" : {
+                "position" : 2,
+                "units" : [
+                    "mm",
+                    "cm"
+                ]
+            },
+            "Dia at lens" : {
+                "position" : 3,
+                "units" : [
+                    "um",
+                    "mm"
+                ]
+            }
+        },
+        "outputs" : {
+            "name" : "Spot size",
+            "units" : [
+                "um",
+                "mm"
+            ]
+        }
     }
 }
