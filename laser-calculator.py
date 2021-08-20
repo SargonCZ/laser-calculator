@@ -204,7 +204,8 @@ class Calculator(ttk.Frame):
         self.var_units = []
         self.var_values = []
         self.var_CB = []
-        for ind,name in enumerate(self.settings[fun]["variables"].keys()):
+        for name in self.settings[fun]["variables"].keys():
+            ind = self.settings[fun]["variables"][name]["position"]
             uneditable = False 
             ttk.Label(self.frame_main,text=self.settings[fun]["variables"][name]["name"]).grid(row=2+ind,column=0,sticky="w")
             # every variable is editable, except for constants, which have asigned value
@@ -249,7 +250,8 @@ class Calculator(ttk.Frame):
         self.inputs_units = []
         self.inputs_values = []
         self.inputs_CB = []
-        for ind,name in enumerate(self.settings[fun]["inputs"].keys()):
+        for name in self.settings[fun]["inputs"].keys():
+            ind = self.settings[fun]["inputs"][name]["position"]
             ttk.Label(self.frame_main,text=name).grid(row=2+ind,column=0,sticky="w")
             self.inputs_values.append(tk.StringVar(value=0))
             ttk.Entry(self.frame_main,textvariable=self.inputs_values[ind]).grid(row=2+ind,column=1,sticky="ew")
@@ -306,7 +308,8 @@ class Calculator(ttk.Frame):
         inputs = "" # This is string to add to history
 
         # Deciding, what to solve
-        for ind,name in enumerate(self.settings[fun]["variables"].keys()):
+        for name in self.settings[fun]["variables"].keys():
+            ind = self.settings[fun]["variables"][name]["position"]
             I[ind] = sympy.symbols(name)
             value = self.var_values[ind].get().strip().replace(",",".")
             if value == "x":
@@ -346,6 +349,7 @@ class Calculator(ttk.Frame):
 
         # Solving and printing the result
         try:
+            solution = self.make_string_good_for_numpy(solution)
             result = eval(solution).to(resulting_units)
             self.result.set(value="{} is {:.3fP}".format(resulting_name,result))
             self.result_number.set(value=str(result.magnitude))
@@ -353,7 +357,20 @@ class Calculator(ttk.Frame):
         except ZeroDivisionError:
             self.write("Cannot divide by zero!")
             return 0
+        except TypeError:
+            self.write("Uncertainties not implemented for nonlinear functions.")
+            return 0
 
+    def make_string_good_for_numpy(self,string):
+        '''
+        When sympy solves equation, there are only function names in the resulting string. In order to evaluate it, I have to add numpy before the function names.
+        '''
+        functions = ["sin","cos","pi"]        
+        for fun in functions:
+            string = string.replace(fun,f"np.{fun}")
+        string = string.replace("anp.sin","np.arcsin") # asin will be already changed to anp.sin, but it should be arcsin
+        return string
+        
 
     def calculate(self,fun):
         '''
@@ -361,16 +378,17 @@ class Calculator(ttk.Frame):
         '''
         I = [None] * len(self.inputs_values) # These will be the quantities with uncertainties and units
         inputs = "" # This is string to add to history
-        for ind,name in enumerate(self.settings[fun]["inputs"].keys()):
+        for name in self.settings[fun]["inputs"].keys():
+            ind = self.settings[fun]["inputs"][name]["position"]
             value = self.inputs_values[ind].get().replace(",",".")
             try:
                 value = value.split("+-")
                 magnitude = value[0].strip()
                 if len(value) > 1: # If there is uncertainty
                     error = value[1].strip()     
-                    I[self.settings[fun]["inputs"][name]["position"]] = (float(magnitude) * self.ureg(self.inputs_units[ind].get())).plus_minus(float(error)) 
+                    I[ind] = (float(magnitude) * self.ureg(self.inputs_units[ind].get())).plus_minus(float(error)) 
                 else:                            
-                    I[self.settings[fun]["inputs"][name]["position"]] = (float(magnitude) * self.ureg(self.inputs_units[ind].get())) 
+                    I[ind] = (float(magnitude) * self.ureg(self.inputs_units[ind].get())) 
                 inputs = inputs + f"{name} = {self.inputs_values[ind].get().replace(',','.')} {self.inputs_units[ind].get()}, "
             except ValueError:
                 self.write("Cannot convert to numbers!")

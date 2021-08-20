@@ -80,24 +80,24 @@
                 "name" : "l3",
                 "position" : 0,
                 "units" : [
-                    "um",
-                    "nm"
+                    "nm",
+                    "um"
                 ]
             },
             "b" : {
                 "name" : "l1",
                 "position" : 1,
                 "units" : [
-                    "um",
-                    "nm"
+                    "nm",
+                    "um"
                 ]
             },
             "c" : {
                 "name" : "l2",
                 "position" : 2,
                 "units" : [
-                    "um",
-                    "nm"
+                    "nm",
+                    "um"
                 ]
             }           
         }
@@ -127,8 +127,8 @@
                 "name" : "Wavelength",
                 "position" : 2,
                 "units" : [
-                    "um",
-                    "nm"
+                    "nm",
+                    "um"
                 ]
             },
             "d" : {
@@ -150,8 +150,8 @@
             "Wavelength" : {
                 "position" : 0,
                 "units" : [
-                    "um",
-                    "nm"
+                    "nm",
+                    "um"
                 ]
             },
             "n2" : {
@@ -197,8 +197,8 @@
             "Wavelength" : {
                 "position" : 0,
                 "units" : [
-                    "um",
-                    "nm"
+                    "nm",
+                    "um"
                 ]
             },
             "n" : {
@@ -273,8 +273,8 @@
                 "name" : "Power",
                 "position" : 0,
                 "units" : [
-                    "kW",
                     "W",
+                    "kW",
                     "mW"
                 ]
             },
@@ -292,15 +292,15 @@
                 "name" : "Frequency",
                 "position" : 2,
                 "units" : [
-                    "MHz",
+                    "Hz",
                     "kHz",
-                    "Hz"
+                    "MHz"
                 ]
             }           
         }
     },
     "duration-bandwidth" : {
-        "name" : "(Lasers) Pulse length-bandwidth",
+        "name" : "(Lasers) Pulse length-bandwidth relation",
         "regime" : "solve",
         "description" : "Solves the minimal pulse duration based on a spectral bandwidth.",
         "function" : "sympy.Eq(I[3],I[2]*I[0]**2/(I[1]*I[4]))",
@@ -309,16 +309,16 @@
                 "name" : "Wavelength",
                 "position" : 0,
                 "units" : [
-                    "um",
-                    "nm"
+                    "nm",
+                    "um"
                 ]
             },
             "b" : {
                 "name" : "Bandwidth",
                 "position" : 1,
                 "units" : [
-                    "um",
-                    "nm"
+                    "nm",
+                    "um"
                 ]
             },
             "c" : {
@@ -389,8 +389,8 @@
             "Wavelength" : {
                 "position" : 0,
                 "units" : [
-                    "um",
-                    "nm"
+                    "nm",
+                    "um"
                 ]
             },
             "Beam quality" : {
@@ -408,8 +408,8 @@
             "Dia at lens" : {
                 "position" : 3,
                 "units" : [
-                    "um",
-                    "mm"
+                    "mm",
+                    "um"
                 ]
             }
         },
@@ -422,7 +422,7 @@
         }
     },
     "wavelength-frequency" : {
-        "name" : "(Lasers) Wavelength-frequency conversion",
+        "name" : "(Optics) Wavelength-frequency conversion",
         "regime" : "solve",
         "description" : "Converts between the wavelength and frequency.",
         "function" : "sympy.Eq(I[0], I[2] / I[1])",
@@ -431,8 +431,8 @@
                 "name" : "Wavelength",
                 "position" : 0,
                 "units" : [
-                    "um",
-                    "nm"
+                    "nm",
+                    "um"
                 ]
             },
             "b" : {
@@ -452,6 +452,188 @@
                 ],
                 "value" : 299792458
             }           
+        }
+    },
+    "brewster-angle" : {
+        "name" : "(Optics) Brewster's angle",
+        "regime" : "calc",
+        "description" : "Calculates the Brewster's angle, where the p-polarized light has no reflection.",
+        "function" : "np.arctan(I[1]/I[0])",
+        "inputs": {
+            "n1" : {
+                "position" : 0,
+                "units" : [                    
+                ]
+            },
+            "n2" : {
+                "position" : 1,
+                "units" : [
+                ]
+            }
+        },
+        "outputs" : {
+            "name" : "theta_B",
+            "units" : [
+                "deg",
+                "rad"
+            ]
+        }
+    },
+    "GDD" : {
+        "name" : "(Gratings) GDD of grating pair",
+        "regime" : "solve",
+        "description" : "Calculates the second order dispersion of a grating pair in -1st diffraction order.",
+        "function" : "sympy.Eq(I[0],- I[1]**3 * I[2] / (np.pi * I[5]**2 * (1/I[3])**2)*(1-(I[1]*I[3]-sympy.sin(I[4]))**2)**-1.5 )",
+        "variables" : {
+            "a" : {
+                "name" : "GDD",
+                "position" : 0,
+                "units" : [
+                    "fs^2",
+                    "ps^2"
+                ]
+            },
+            "b" : {
+                "name" : "Wavelength",
+                "position" : 1,
+                "units" : [
+                    "nm",
+                    "um"
+                ]
+            },
+            "c" : {
+                "name" : "Distance between gratings",
+                "position" : 2,
+                "units" : [
+                    "m",
+                    "cm",
+                    "mm"
+                ]
+            },            
+            "d" : {
+                "name" : "Grating line density",
+                "position" : 3,
+                "units" : [
+                    "1/mm"
+                ]
+            },
+            "e" : {
+                "name" : "Incidence angle",
+                "position" : 4,
+                "units" : [
+                    "deg",
+                    "rad"
+                ]
+            },
+            "f" : {
+                "name" : "c",
+                "position" : 5,
+                "units" : [
+                    "m/s"
+                ],
+                "value" : 299792458
+            }         
+        }
+    },
+    "TOD" : {
+        "name" : "(Gratings) TOD of grating pair",
+        "regime" : "solve",
+        "description" : "Calculates the third order dispersion of a grating pair in -1st diffraction order.",
+        "function" : "sympy.Eq(I[0],3*I[1]/(2*np.pi*I[5]) * (1 + I[1]*I[3]*sympy.sin(I[4]) - sympy.sin(I[4])**2)/(1 - (I[1]*I[3]-sympy.sin(I[4]))**2) *(I[1]**3 * I[2] / (np.pi * I[5]**2 * (1/I[3])**2)*(1-(I[1]*I[3]-sympy.sin(I[4]))**2)**-1.5 ))",
+        "variables" : {
+            "a" : {
+                "name" : "TOD",
+                "position" : 0,
+                "units" : [
+                    "fs^3",
+                    "ps^3"
+                ]
+            },
+            "b" : {
+                "name" : "Wavelength",
+                "position" : 1,
+                "units" : [
+                    "nm",
+                    "um"
+                ]
+            },
+            "c" : {
+                "name" : "Distance between gratings",
+                "position" : 2,
+                "units" : [
+                    "m",
+                    "cm",
+                    "mm"
+                ]
+            },            
+            "d" : {
+                "name" : "Grating line density",
+                "position" : 3,
+                "units" : [
+                    "1/mm"
+                ]
+            },
+            "e" : {
+                "name" : "Incidence angle",
+                "position" : 4,
+                "units" : [
+                    "deg",
+                    "rad"
+                ]
+            },
+            "f" : {
+                "name" : "c",
+                "position" : 5,
+                "units" : [
+                    "m/s"
+                ],
+                "value" : 299792458
+            }         
+        }
+    },
+    "diffraction-angle" : {
+        "name" : "(Gratings) Diffraction angle",
+        "regime" : "solve",
+        "description" : "Solves the diffraction equation.",
+        "function" : "sympy.Eq(I[4], sympy.asin(sympy.sin(I[3]) + I[0]*I[1]*I[2]))",
+        "variables" : {
+            "a" : {
+                "name" : "Diffraction order",
+                "position" : 0,
+                "units" : [
+                ]
+            },
+            "b" : {
+                "name" : "Wavelength",
+                "position" : 1,
+                "units" : [
+                    "nm",
+                    "um"
+                ]
+            },
+            "c" : {
+                "name" : "Grating line density",
+                "position" : 2,
+                "units" : [
+                    "1/mm"
+                ]
+            },
+            "d" : {
+                "name" : "Incidence angle",
+                "position" : 3,
+                "units" : [
+                    "deg",
+                    "rad"
+                ]
+            },
+            "e" : {
+                "name" : "Diffraction angle",
+                "position" : 4,
+                "units" : [
+                    "deg",
+                    "rad"
+                ]
+            }         
         }
     }
 }

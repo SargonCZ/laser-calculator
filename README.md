@@ -42,18 +42,26 @@ In contrast to those, however, you can quickly and simply add anything you need 
 
 ### List of available function
 
-- Average power-energy-frequency relation (solve)
-- Beam divergence and quality (solve)
-- Peak fluence (calc)
-- Peak intensity (calc)
-- Peak power-energy-duration relation (solve)
-- Pulse length-bandwidth relation (solve)
-- Frequency-wavelength conversion (solve)
-- Critical power for self-focusing (calc)
-- Simplified B-integral (calc)
-- Snell's law (calc)
-- Spot size after lens (calc)
-- Wavelength matching (solve)
+- Gratings:
+  - Diffraction anlge (solve)
+  - GDD of a grating pair (solve)
+  - TOD of a grating pair (solve)
+- Lasers:
+  - Average power-energy-frequency relation (solve)
+  - Beam divergence and quality (solve)
+  - Peak fluence (calc)
+  - Peak intensity (calc)
+  - Peak power-energy-duration relation (solve)
+  - Pulse length-bandwidth relation (solve)
+- Nonlinear:
+  - Critical power for self-focusing (calc)
+  - Simplified B-integral (calc)
+- Optics:
+  - Brewster's angle
+  - Snell's law (calc)
+  - Spot size after lens (calc)
+  - Wavelength matching (solve)
+  - Frequency-wavelength conversion (solve)
 
 New functions can be easily added by following the section [Adding new functions](#adding-new-functions).
 
@@ -104,6 +112,8 @@ If you have a measured quantity with an uncertainty, you can add this error afte
 ![Peak intensity with uncertainty](screenshots/peak-intensity-uncertainty.png)
 
 This works only for linear function (meaning no `sin` and similar):
+- GDD of a grating pair (not working for θ)
+- TOD of a grating pair (not working for θ)
 - Average power-energy-frequency relation
 - Beam divergence and quality
 - Peak fluence
