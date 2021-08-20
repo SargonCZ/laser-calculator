@@ -67,7 +67,7 @@ New functions can be easily added by following the section [Adding new functions
 
 ### Starting the application
 
-To start the application, you need to have python installed and following packages have to be available: `numpy`, `pint`, `uncertainties` and `sympy`. In case you are using conda package manager, you can set up the environment [like this](#setting-up-conda-environment) and then start the program [like this](#starting-from-bat-file-with-conda). 
+To start the application by running `laser-calculator.py`, you need to have python installed and following packages have to be available: `numpy`, `pint`, `uncertainties` and `sympy`. In case you are using conda package manager, you can set up the environment [like this](#setting-up-conda-environment) and then start the program [like this](#starting-from-bat-file-with-conda). 
 
 ### Basic overview
 
