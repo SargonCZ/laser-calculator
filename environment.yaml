@@ -1,3 +1,4 @@
+# run with conda env update -f environment.yaml
 name: laser-calculator
 channels:
   - conda-forge
@@ -10,3 +11,4 @@ dependencies:
   - ipython
   - uncertainties=3.1
   - sympy=1.8
+  - cx_Freeze=6.9
