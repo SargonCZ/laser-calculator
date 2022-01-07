@@ -66,6 +66,10 @@ class Calculator(ttk.Frame):
         self.menubar.add_cascade(menu=self.menu_options,label="Options")
         self.menu_options.add_command(label="Show history",command=self.show_history,image=self.p_history,compound=tk.LEFT,accelerator="Ctrl+H")
         self.menu_options.add_command(label="Clear history",command=self.clear_history,image=self.p_clear,compound=tk.LEFT)
+        self.menubar.add_cascade(menu=self.edit_options,label="Edit")
+        self.edit_options.add_command(label="Open functions.json",command=print("Hi1"))
+        self.edit_options.add_command(label="Open constants.json",command=print("Hi2"))
+        self.edit_options.add_command(label="Open formulas folder",command=print("Hi3"))
         self.history_window_open = False
         self.bind_all("<Control-KeyPress-h>",self.show_history)
 
