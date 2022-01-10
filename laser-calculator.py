@@ -40,6 +40,7 @@ class Calculator(ttk.Frame):
         self.p_history = tk.PhotoImage(master=self,file=r"icons/log.png")
         self.p_clear = tk.PhotoImage(master=self,file=r"icons/delete.png")
         self.p_calc = tk.PhotoImage(master=self,file=r"icons/calc.png")
+        self.p_help = tk.PhotoImage(master=self,file=r"icons/help.png").subsample(3)
         self.ureg = pint.UnitRegistry()
 
         # Creating function selection
@@ -69,13 +70,20 @@ class Calculator(ttk.Frame):
         self.menubar.add_cascade(menu=self.menu_options,label="Options")
         self.menu_options.add_command(label="Show history",command=self.show_history,image=self.p_history,compound=tk.LEFT,accelerator="Ctrl+H")
         self.menu_options.add_command(label="Clear history",command=self.clear_history,image=self.p_clear,compound=tk.LEFT)
+
         self.edit_options = tk.Menu(self.menubar)
         self.menubar.add_cascade(menu=self.edit_options,label="Edit")
         self.edit_options.add_command(label="(Re)define functions",command=lambda: os.startfile(f"{dir}\\functions.json"))
         self.edit_options.add_command(label="(Re)define constants",command=lambda: os.startfile(f"{dir}\\constants.json"))
         self.edit_options.add_command(label="Open formulas folder",command=lambda: subprocess.call(f"explorer {dir}\\formulas"))
+
+        self.menu_help = tk.Menu(self.menubar)
+        self.menubar.add_cascade(menu=self.menu_help,label="Help")
+        self.menu_help.add_command(label="Show readme",command=self.show_readme,image=self.p_help,compound=tk.LEFT,accelerator="F1")
+
         self.history_window_open = False
         self.bind_all("<Control-KeyPress-h>",self.show_history)
+        self.bind_all("<F1>",self.show_readme)
 
     def on_closing(self):
         '''
@@ -145,6 +153,12 @@ class Calculator(ttk.Frame):
         if self.history_window_open:
             for children in self.history_tree.get_children():
                 self.history_tree.delete(children)
+
+    def show_readme(self,event=None):
+        '''
+        Shows HTML version of the README file
+        '''
+        os.startfile(f"{dir}\\README.html")
 
     def on_function_selected(self,event=None):
         '''

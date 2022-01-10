@@ -29,6 +29,7 @@ In contrast to those, however, you can quickly and simply add anything you need 
     - [Using uncertainties](#using-uncertainties)
     - [Constants in the function](#constants-in-the-function)
     - [History](#history)
+    - [Displaying this file](#displaying-this-file)
     - [Starting from `.bat` file with conda](#starting-from-bat-file-with-conda)
   - [Adding new functions](#adding-new-functions)
     - [Structure of the `functions.json` file](#structure-of-the-functionsjson-file)
@@ -36,6 +37,8 @@ In contrast to those, however, you can quickly and simply add anything you need 
   - [Local development](#local-development)
     - [Setting up conda environment](#setting-up-conda-environment)
     - [Packages](#packages)
+    - [Building and distribution](#building-and-distribution)
+    - [Updating README](#updating-readme)
 
 ---
 
@@ -146,6 +149,10 @@ Alternatively, one can use `Ctrl+H` shortcut. The history will be shown in separ
 ![History](screenshots/history.png)
 
 The history is saved in the `history.json` file and can be cleared by deleting the file or by clicking the `Clear history` button in the `Options` menu.
+
+### Displaying this file
+
+If you need help, you can display the `.html` version of this README file by pressing `F1` key or navigating to the `Help` menu and clicking on `Show readme` item.
 
 ### Starting from `.bat` file with conda
 
@@ -339,3 +346,11 @@ If you are not using conda, below is the list of packages you need in order to s
 - pint=0.17
 - uncertainties=3.1
 - sympy=1.8
+
+### Building and distribution
+
+You can build the application using `cx_Freeze` package and running `python setup.py build` and `python setup.py bdist_msi`.
+
+### Updating README
+
+If you update this file, you should also update the `.html` version of the file with the use of `pandoc`. It is made simple by running the `make_html_pandoc.bat` file.

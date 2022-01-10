@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<!--
+==============================================================================
+           "GitHub HTML5 Pandoc Template" v2.2 — by Tristano Ajmone
+==============================================================================
+Copyright © Tristano Ajmone, 2017-2020, MIT License (MIT). Project's home:
+
+- https://github.com/tajmone/pandoc-goodies
+
+The CSS in this template reuses source code taken from the following projects:
+
+- GitHub Markdown CSS: Copyright © Sindre Sorhus, MIT License (MIT):
+  https://github.com/sindresorhus/github-markdown-css
+
+- Primer CSS: Copyright © 2016-2017 GitHub Inc., MIT License (MIT):
+  http://primercss.io/
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The MIT License
+
+Copyright (c) Tristano Ajmone, 2017-2020 (github.com/tajmone/pandoc-goodies)
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+Copyright (c) 2017 GitHub Inc.
+
+"GitHub Pandoc HTML5 Template" is Copyright (c) Tristano Ajmone, 2017-2020,
+released under the MIT License (MIT); it contains readaptations of substantial
+portions of the following third party softwares:
+
+(1) "GitHub Markdown CSS", Copyright (c) Sindre Sorhus, MIT License (MIT).
+(2) "Primer CSS", Copyright (c) 2016 GitHub Inc., MIT License (MIT).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+==============================================================================-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+@charset "UTF-8";.markdown-body{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#24292e;font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:16px;line-height:1.5;word-wrap:break-word;box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}.markdown-body a{color:#0366d6;background-color:transparent;text-decoration:none;-webkit-text-decoration-skip:objects}.markdown-body a:active,.markdown-body a:hover{outline-width:0}.markdown-body a:hover{text-decoration:underline}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body strong{font-weight:600}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1{font-size:2em;margin:.67em 0;padding-bottom:.3em;border-bottom:1px solid #eaecef}.markdown-body h2{padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid #eaecef}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#6a737d}.markdown-body img{border-style:none}.markdown-body svg:not(:root){overflow:hidden}.markdown-body hr{box-sizing:content-box;height:.25em;margin:24px 0;padding:0;overflow:hidden;background-color:#e1e4e8;border:0}.markdown-body hr::before{display:table;content:""}.markdown-body hr::after{display:table;clear:both;content:""}.markdown-body input{margin:0;overflow:visible;font:inherit;font-family:inherit;font-size:inherit;line-height:inherit}.markdown-body [type=checkbox]{box-sizing:border-box;padding:0}.markdown-body *{box-sizing:border-box}.markdown-body blockquote{margin:0}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol ol,.markdown-body ul ol{list-style-type:lower-roman}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ul ol ol,.markdown-body ul ul ol{list-style-type:lower-alpha}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dd{margin-left:0}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body code{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace}.markdown-body pre{font:12px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;word-wrap:normal}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body table{display:block;width:100%;overflow:auto;border-spacing:0;border-collapse:collapse}.markdown-body table th{font-weight:600}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #dfe2e5}.markdown-body table tr{background-color:#fff;border-top:1px solid #c6cbd1}.markdown-body table tr:nth-child(2n){background-color:#f6f8fa}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body code{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}.markdown-body code::after,.markdown-body code::before{letter-spacing:-.2em;content:" "}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}.markdown-body pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code::after,.markdown-body pre code::before{content:normal}.markdown-body .full-commit .btn-outline:not(:disabled):hover{color:#005cc5;border-color:#005cc5}.markdown-body kbd{box-shadow:inset 0 -1px 0 #959da5;display:inline-block;padding:3px 5px;font:11px/10px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;color:#444d56;vertical-align:middle;background-color:#fcfcfc;border:1px solid #c6cbd1;border-bottom-color:#959da5;border-radius:3px;box-shadow:inset 0 -1px 0 #959da5}.markdown-body :checked+.radio-label{position:relative;z-index:1;border-color:#0366d6}.markdown-body .task-list-item{list-style-type:none}.markdown-body .task-list-item+.task-list-item{margin-top:3px}.markdown-body .task-list-item input{margin:0 .2em .25em -1.6em;vertical-align:middle}.markdown-body::before{display:table;content:""}.markdown-body::after{display:table;clear:both;content:""}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.Alert,.Error,.Note,.Success,.Warning{padding:11px;margin-bottom:24px;border-style:solid;border-width:1px;border-radius:4px}.Alert p,.Error p,.Note p,.Success p,.Warning p{margin-top:0}.Alert p:last-child,.Error p:last-child,.Note p:last-child,.Success p:last-child,.Warning p:last-child{margin-bottom:0}.Alert{color:#246;background-color:#e2eef9;border-color:#bac6d3}.Warning{color:#4c4a42;background-color:#fff9ea;border-color:#dfd8c2}.Error{color:#911;background-color:#fcdede;border-color:#d2b2b2}.Success{color:#22662c;background-color:#e2f9e5;border-color:#bad3be}.Note{color:#2f363d;background-color:#f6f8fa;border-color:#d5d8da}.Alert h1,.Alert h2,.Alert h3,.Alert h4,.Alert h5,.Alert h6{color:#246;margin-bottom:0}.Warning h1,.Warning h2,.Warning h3,.Warning h4,.Warning h5,.Warning h6{color:#4c4a42;margin-bottom:0}.Error h1,.Error h2,.Error h3,.Error h4,.Error h5,.Error h6{color:#911;margin-bottom:0}.Success h1,.Success h2,.Success h3,.Success h4,.Success h5,.Success h6{color:#22662c;margin-bottom:0}.Note h1,.Note h2,.Note h3,.Note h4,.Note h5,.Note h6{color:#2f363d;margin-bottom:0}.Alert h1:first-child,.Alert h2:first-child,.Alert h3:first-child,.Alert h4:first-child,.Alert h5:first-child,.Alert h6:first-child,.Error h1:first-child,.Error h2:first-child,.Error h3:first-child,.Error h4:first-child,.Error h5:first-child,.Error h6:first-child,.Note h1:first-child,.Note h2:first-child,.Note h3:first-child,.Note h4:first-child,.Note h5:first-child,.Note h6:first-child,.Success h1:first-child,.Success h2:first-child,.Success h3:first-child,.Success h4:first-child,.Success h5:first-child,.Success h6:first-child,.Warning h1:first-child,.Warning h2:first-child,.Warning h3:first-child,.Warning h4:first-child,.Warning h5:first-child,.Warning h6:first-child{margin-top:0}h1.title,p.subtitle{text-align:center}h1.title.followed-by-subtitle{margin-bottom:0}p.subtitle{font-size:1.5em;font-weight:600;line-height:1.25;margin-top:0;margin-bottom:16px;padding-bottom:.3em}div.line-block{white-space:pre-line}
+  </style>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article class="markdown-body">
+<h1 id="laser-and-optics-calculator">🌠 Laser and optics calculator</h1>
+<p>This is a simple calculator, which quickly allows one to calculate various functions and solve equations common in the optics and laser community. The two main things I have focused on are:</p>
+<ol type="1">
+<li><strong>Units</strong> - all the calculations are working with the physical units that can be chosen by the users.</li>
+<li><strong>Extendibility</strong> - it is relatively simple to add a new function, change the available one, add allowed units and so on.</li>
+</ol>
+<p>Additionally, when the calculated or solved function is <em>linear</em>, one can add an uncertainty to the values, which will be propagated into the results.</p>
+<p>Nice online calculators, that can do similar stuff, are these:</p>
+<ul>
+<li><a href="http://toolbox.lightcon.com">Optics toolbox</a> from Light conversion</li>
+<li><a href="https://lasercalculator.com">Laser calculator</a> by Joona Rissanen</li>
+</ul>
+<p>In contrast to those, however, you can quickly and simply add anything you need to this one 👍.</p>
+<hr />
+<h2 id="table-of-contents">Table of contents</h2>
+<ul>
+<li><a href="#-laser-and-optics-calculator">🌠 Laser and optics calculator</a>
+<ul>
+<li><a href="#table-of-contents">Table of contents</a></li>
+<li><a href="#application-usage">Application usage</a>
+<ul>
+<li><a href="#list-of-available-function">List of available function</a></li>
+<li><a href="#starting-the-application">Starting the application</a></li>
+<li><a href="#basic-overview">Basic overview</a>
+<ul>
+<li><a href="#calculate-regime">Calculate regime</a></li>
+<li><a href="#solve-equation-regime">Solve equation regime</a></li>
+</ul></li>
+<li><a href="#using-uncertainties">Using uncertainties</a></li>
+<li><a href="#constants-in-the-function">Constants in the function</a></li>
+<li><a href="#history">History</a></li>
+<li><a href="#displaying-this-file">Displaying this file</a></li>
+<li><a href="#starting-from-bat-file-with-conda">Starting from <code>.bat</code> file with conda</a></li>
+</ul></li>
+<li><a href="#adding-new-functions">Adding new functions</a>
+<ul>
+<li><a href="#structure-of-the-functionsjson-file">Structure of the <code>functions.json</code> file</a></li>
+<li><a href="#structure-of-the-constantsjson-file">Structure of the <code>constants.json</code> file</a></li>
+</ul></li>
+<li><a href="#local-development">Local development</a>
+<ul>
+<li><a href="#setting-up-conda-environment">Setting up conda environment</a></li>
+<li><a href="#packages">Packages</a></li>
+<li><a href="#building-and-distribution">Building and distribution</a></li>
+<li><a href="#updating-readme">Updating README</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="application-usage">Application usage</h2>
+<h3 id="list-of-available-function">List of available function</h3>
+<ul>
+<li>Gratings:
+<ul>
+<li>Diffraction anlge (solve)</li>
+<li>GDD of a grating pair (solve)</li>
+<li>TOD of a grating pair (solve)</li>
+</ul></li>
+<li>Lasers:
+<ul>
+<li>Average power-energy-frequency relation (solve)</li>
+<li>Beam divergence and quality (solve)</li>
+<li>Peak fluence (calc)</li>
+<li>Peak intensity (calc)</li>
+<li>Peak power-energy-duration relation (solve)</li>
+<li>Pulse length-bandwidth relation (solve)</li>
+</ul></li>
+<li>Nonlinear:
+<ul>
+<li>Critical power for self-focusing (calc)</li>
+<li>Simplified B-integral (calc)</li>
+</ul></li>
+<li>Optics:
+<ul>
+<li>Brewster’s angle</li>
+<li>Snell’s law (calc)</li>
+<li>Spot size after lens (calc)</li>
+<li>Wavelength matching (solve)</li>
+<li>Frequency-wavelength conversion (solve)</li>
+</ul></li>
+</ul>
+<p>New functions can be easily added by following the section <a href="#adding-new-functions">Adding new functions</a>.</p>
+<h3 id="starting-the-application">Starting the application</h3>
+<p>To start the application by running <code>laser-calculator.py</code>, you need to have python installed and following packages have to be available: <code>numpy</code>, <code>pint</code>, <code>uncertainties</code> and <code>sympy</code>. In case you are using conda package manager, you can set up the environment <a href="#setting-up-conda-environment">like this</a> and then start the program <a href="#starting-from-bat-file-with-conda">like this</a>.</p>
+<h3 id="basic-overview">Basic overview</h3>
+<p>After the application is started, following window appears:</p>
+<figure>
+<img src="screenshots/on-start.png" alt="Opening window" /><figcaption aria-hidden="true">Opening window</figcaption>
+</figure>
+<p>There is a dropdown menu, from which you can choose a function to calculate or an equation to solve. Short instructions of use are added below the dropdown menu.</p>
+<p>After the selction of one of the functions, the program will rearange itself accordingly. First, let’s take a look on the laser peak intensity calculation as an example of the <em>calculate regime</em>.</p>
+<h4 id="calculate-regime">Calculate regime</h4>
+<p>After the selection of the desired function, window similar to the following one will appear:</p>
+<figure>
+<img src="screenshots/peak-intensity-start.png" alt="Peak intensity on start" /><figcaption aria-hidden="true">Peak intensity on start</figcaption>
+</figure>
+<p>The <em>calculate regime</em> can be recognized by the <code>Calculate</code> button and by the possibility to choose the units of the output variable.</p>
+<p>After the input variables are filled and the units chosen, you can click the <code>Calculate</code> button to obtain the result in your chosen units. The program will look like this:</p>
+<figure>
+<img src="screenshots/peak-intensity-calculated.png" alt="Peak intensity calculated" /><figcaption aria-hidden="true">Peak intensity calculated</figcaption>
+</figure>
+<p>In the label with a big font, the result is shown with the units. Below is an entry, from which you can simply copy the result as a number.</p>
+<h4 id="solve-equation-regime">Solve equation regime</h4>
+<p>Sligthly different is the <em>solve regime</em>, as there is no predetermined output. You have to choose the desired output variable by writing <code>x</code> instead of its value. For example, let’s take a look at beam divergence calculation:</p>
+<figure>
+<img src="screenshots/divergence-start.png" alt="Beam divergence on start" /><figcaption aria-hidden="true">Beam divergence on start</figcaption>
+</figure>
+<p>One can for example want to calculate the beam divergence from the beam quality and beam waist diameter at a particular wavelength. Or one can measure the beam divergence and then find out, how small is the beam diameter in waist. Both of these can be calculated like on the following pictures:</p>
+<p><img src="screenshots/divergence-calc-div.png" alt="Beam divergence with divergence calculated" /> <img src="screenshots/divergence-calc-diam.png" alt="Beam divergence with diameter calculated" /></p>
+<h3 id="using-uncertainties">Using uncertainties</h3>
+<p>If you have a measured quantity with an uncertainty, you can add this error after the magnitude by using <code>+-</code> like on the following picture:</p>
+<figure>
+<img src="screenshots/peak-intensity-uncertainty.png" alt="Peak intensity with uncertainty" /><figcaption aria-hidden="true">Peak intensity with uncertainty</figcaption>
+</figure>
+<p>This works only for linear function (meaning no <code>sin</code> and similar):</p>
+<ul>
+<li>GDD of a grating pair (not working for θ)</li>
+<li>TOD of a grating pair (not working for θ)</li>
+<li>Average power-energy-frequency relation</li>
+<li>Beam divergence and quality</li>
+<li>Peak fluence</li>
+<li>Peak intensity</li>
+<li>Peak power-energy-duration relation</li>
+<li>Pulse length-bandwidth relation</li>
+<li>Frequency-wavelength conversion</li>
+<li>Critical power for self-focusing (but it doesn’t really make sense here)</li>
+<li>Simplified B-integral</li>
+<li>Spot size</li>
+<li>Wavelength matching</li>
+</ul>
+<h3 id="constants-in-the-function">Constants in the function</h3>
+<p>If there are some constants associated with the functions, they will be displayed in a list on the right part of the program, like this:</p>
+<figure>
+<img src="screenshots/b-integral.png" alt="Showing associated constants" /><figcaption aria-hidden="true">Showing associated constants</figcaption>
+</figure>
+<p>These constants can be easily changed or added, the process in described <a href="#structure-of-the-constantsjson-file">in this section</a>.</p>
+<h3 id="history">History</h3>
+<p>History of calculations can be shown by clicking on the <code>Options</code> menu and then <code>Show history</code> button.</p>
+<figure>
+<img src="screenshots/options-menu.png" alt="Options menu" /><figcaption aria-hidden="true">Options menu</figcaption>
+</figure>
+<p>Alternatively, one can use <code>Ctrl+H</code> shortcut. The history will be shown in separate window with four columns, showing the date and time of calculation, the name of the function, inputs and outputs, as is demonstrated on the following picture:</p>
+<figure>
+<img src="screenshots/history.png" alt="History" /><figcaption aria-hidden="true">History</figcaption>
+</figure>
+<p>The history is saved in the <code>history.json</code> file and can be cleared by deleting the file or by clicking the <code>Clear history</code> button in the <code>Options</code> menu.</p>
+<h3 id="displaying-this-file">Displaying this file</h3>
+<p>If you need help, you can display the <code>.html</code> version of this README file by pressing <code>F1</code> key or navigating to the <code>Help</code> menu and clicking on <code>Show readme</code> item.</p>
+<h3 id="starting-from-.bat-file-with-conda">Starting from <code>.bat</code> file with conda</h3>
+<p>If you have conda installed and use the appropriate conda environment, and you would like to quickly start the program just by double-clicking some icon, you can create a <code>.bat</code> file in the notepad for example. In this file, something similar to the follwong command should be written:</p>
+<pre class="bat"><code>Call C:\Users\user.name\Anaconda3\Scripts\activate.bat &amp; conda activate laser-calculator &amp; cd &quot;C:\Users\user.name\Documents\Python\laser-calculator&quot; &amp; python &quot;C:\Users\user.name\Documents\Python\laser-calculator\laser-calculator.py&quot;
+pause</code></pre>
+<p>Of course, you have to change the <code>user.name</code> and the file locations. This will first activate conda in the open command prompt, next it will activate the respective python environment. Afterwards, it will change the working directory to the folder, where the program is saved, and finally, it will start the program. You can of course use any other method. For this to work, you theoretically don’t need to have python and conda added in your system path.</p>
+<hr />
+<h2 id="adding-new-functions">Adding new functions</h2>
+<p>New function can be added to the <code>functions.json</code> file. The program offers the option to directly open and edit the <code>functions.json</code> file in the default editor by selecting the <code>"(Re)define functions"</code> from the <code>"Edit"</code> menu. The structure of the file is described <a href="#structure-of-the-functionsjson-file">below</a>. All the function equations are evaluated by the python script with the use of <code>eval</code> or <code>exec</code>, which can make some mess, if you write something else than the intended function there. The program is not very strict in controlling what does it evaluate, since we are all consenting adults.</p>
+<p>Each function can have an assigned equation saved as a <code>png</code> figure, which is displayed in the program. The equations are generated by webpage https://latex.codecogs.com/legacy/eqneditor/editor.php, downloaded in png format and saved in the <code>formulas</code> folder with the same name, as is the name of the function definition.</p>
+<p>If you want me to add a new function, you can open an issue. Preferably, attach also the formula, description and other parts yourself. You can of course fork the repository and eventually open a pull request.</p>
+<h3 id="structure-of-the-functions.json-file">Structure of the <code>functions.json</code> file</h3>
+<p>How does the definition of one sample function look like in the <code>functions.json</code> file is shown below.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;duration-bandwidth&quot;</span> <span class="er">:</span> <span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="st">&quot;(Lasers) Pulse length-bandwidth&quot;</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;regime&quot;</span> <span class="fu">:</span> <span class="st">&quot;calc&quot;</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;description&quot;</span> <span class="fu">:</span> <span class="st">&quot;Calculates the minimal pulse duration based on a spectral bandwidth.&quot;</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;function&quot;</span> <span class="fu">:</span> <span class="st">&quot;I[2]*I[0]**2/(I[1]*299792458*self.ureg(&#39;m/s&#39;))&quot;</span><span class="fu">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;inputs&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;Wavelength&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;position&quot;</span> <span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;units&quot;</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;um&quot;</span><span class="ot">,</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;nm&quot;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                <span class="ot">]</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">},</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;Bandwidth&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;position&quot;</span> <span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;units&quot;</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;um&quot;</span><span class="ot">,</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;nm&quot;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                <span class="ot">]</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="fu">},</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;TBP&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;position&quot;</span> <span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;units&quot;</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                <span class="ot">]</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            <span class="fu">}</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">},</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;outputs&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="st">&quot;Pulse duration&quot;</span><span class="fu">,</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;units&quot;</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;ns&quot;</span><span class="ot">,</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;ps&quot;</span><span class="ot">,</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;fs&quot;</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        <span class="fu">},</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;constants&quot;</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;TBP&quot;</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="ot">]</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="er">,</span></span></code></pre></div>
+<p>The <code>functions.json</code> file consists of a dictionary of definitions similar to the one above. The key of the particular dictionary item (in this case <code>"duration-bandwidth"</code>) is the name of the definition, used also as a filename for the <code>png</code> equation. The value of this dictionary is the function definition, which is a dictionary in itself, with the following keys:</p>
+<ul>
+<li><code>"name"</code> is the name shown in the program. Should be short and descriptive and can also contain a category for quick orientation.</li>
+<li><code>"regime"</code> can be either <code>"calc"</code> or <code>"solve"</code>. First, I will describe the <code>"calc"</code> regime and then, I will shown the differences for the <code>"solve"</code> regime.</li>
+<li><code>"description"</code> is the extended description also shown in the program.</li>
+<li><code>"function"</code> is the function to be evaluated. Each of the variables is represented by <code>I[ind]</code>, where <code>ind</code> is defined in the <code>"inputs"</code>. If there is a constant with a unit, as in the example above, the unit can be added by multiplying the magnitude with <code>ureg('unit')</code>. The function represents the right side of the particular equation, if the left side is the desired output.</li>
+<li><code>"inputs"</code> is a dictionary of input variables, each defined by a key (name shown in the program) and values of <code>"position"</code> (starting from zero and corresponding to the index <code>ind</code> in the function definition) and a list of allowed units.</li>
+<li><code>"outputs"</code> defines a name and allowed units for the result of the calculation.</li>
+<li><code>"constants"</code> - if there are some constants in the calculation (like the <em>time-bandwidth product</em> in the example above), it can be written in the optional key <code>"constants"</code>. Multiple constants can be added. The respective values for the constants have to be added to the <code>constants.json</code>, which is described in <a href="#structure-of-the-constantsjson-file">the next section</a>.</li>
+</ul>
+<p>If the regime of the calculation is <code>"solve"</code>, following changes take place:</p>
+<ul>
+<li><code>"function"</code> definition is now an equation in the form of <code>"sympy.Eq(</code> + left-hand side + <code>,</code> + right-hand side + <code>)"</code>.</li>
+<li><code>"variables"</code> - all variables used in the function definition are listed under the <code>"variables"</code> keys, and <code>"inputs"</code> and <code>"output"</code> keys are missing. Every variable has an associated name, position (corresponding to the index <code>ind</code>) and units. If there is some constant with units in the equation, it can be added as an additional variable with it’s value filled in, as is done in the following example (the last variable, speed of light).</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>        <span class="er">&quot;function&quot;</span> <span class="er">:</span> <span class="er">&quot;sympy.Eq(I</span><span class="ot">[</span><span class="dv">3</span><span class="ot">]</span><span class="er">,I</span><span class="ot">[</span><span class="dv">2</span><span class="ot">]</span><span class="er">*I</span><span class="ot">[</span><span class="dv">0</span><span class="ot">]</span><span class="er">**2/(I</span><span class="ot">[</span><span class="dv">1</span><span class="ot">]</span><span class="er">*I</span><span class="ot">[</span><span class="dv">4</span><span class="ot">]</span><span class="er">))&quot;,</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="er">&quot;variables&quot;:</span> <span class="fu">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;a&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="st">&quot;Wavelength&quot;</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;position&quot;</span> <span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;units&quot;</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;um&quot;</span><span class="ot">,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;nm&quot;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                <span class="ot">]</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">},</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;b&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="st">&quot;Bandwidth&quot;</span><span class="fu">,</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;position&quot;</span> <span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;units&quot;</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;um&quot;</span><span class="ot">,</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;nm&quot;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                <span class="ot">]</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">},</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;c&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="st">&quot;TBP&quot;</span><span class="fu">,</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;position&quot;</span> <span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;units&quot;</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                <span class="ot">]</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>            <span class="fu">},</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;d&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="st">&quot;Pulse duration&quot;</span><span class="fu">,</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;position&quot;</span> <span class="fu">:</span> <span class="dv">3</span><span class="fu">,</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;units&quot;</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;ns&quot;</span><span class="ot">,</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;ps&quot;</span><span class="ot">,</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;fs&quot;</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>                <span class="ot">]</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>            <span class="fu">},</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;e&quot;</span> <span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="st">&quot;c&quot;</span><span class="fu">,</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;position&quot;</span> <span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;units&quot;</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;m/s&quot;</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>                <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>                <span class="dt">&quot;value&quot;</span> <span class="fu">:</span> <span class="dv">299792458</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>            <span class="fu">}</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span><span class="er">,</span></span></code></pre></div>
+<p>In the program, this last variable will be shown, but it will be in <code>readonly</code> or <code>disabled</code> state, like it is shown in the next figure:</p>
+<figure>
+<img src="screenshots/bandwidth.png" alt="Variable in solve regime" /><figcaption aria-hidden="true">Variable in solve regime</figcaption>
+</figure>
+<h3 id="structure-of-the-constants.json-file">Structure of the <code>constants.json</code> file</h3>
+<p>The program also offers the option to directly open and edit the <code>constants.json</code> file in the default editor by selecting the <code>"(Re)define constants"</code> from the <code>"Edit"</code> menu. Currently, the <code>constants.json</code> file looks like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;n2&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;air, 308 nm, 1 atm&quot;</span><span class="fu">:</span> <span class="st">&quot;1.22e-22 m^2/W&quot;</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;fused silica, 1030 nm&quot;</span><span class="fu">:</span> <span class="st">&quot;2.19e-20 m^2/W&quot;</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;calcium fluoride (CaF2)&quot;</span><span class="fu">:</span> <span class="st">&quot;1.71e-20 m^2/W&quot;</span><span class="fu">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;BBO, 532 nm&quot;</span><span class="fu">:</span> <span class="st">&quot;~8e-20 m^2/W&quot;</span><span class="fu">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;LBO, 850 nm&quot;</span><span class="fu">:</span> <span class="st">&quot;1.9e-20 m^2/W&quot;</span><span class="fu">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;YAG, 1064 nm&quot;</span><span class="fu">:</span> <span class="st">&quot;6.2e-20 m^2/W&quot;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;TBP&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Gaussian&quot;</span><span class="fu">:</span> <span class="st">&quot;0.441271&quot;</span><span class="fu">,</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;sech&quot;</span><span class="fu">:</span> <span class="st">&quot;0.314833&quot;</span><span class="fu">,</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Lorentzian&quot;</span><span class="fu">:</span> <span class="st">&quot;0.141999&quot;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>It is a dictionary of constants defined by the keys (names, referenced in the definition of the functions) and values, which can take any form following the <code>"name" : "value"</code> convention and will be displayed in the program, when the associated functions are chosen.</p>
+<hr />
+<h2 id="local-development">Local development</h2>
+<p>The GUI and the calculation part is writen in Python. Version 3.8.10 was used for the development.</p>
+<p>The instructions below presume you have cloned this git repository you are in a command line (<code>bash</code>, <code>cmd</code> etc.) in the root directory of this project.</p>
+<h3 id="setting-up-conda-environment">Setting up conda environment</h3>
+<p>For the first time, create a new <code>laser-calculator</code> conda environment with necessary packages using</p>
+<pre><code>conda env create -f environment.yaml</code></pre>
+<p>This environment must be updated when the <code>environment.yaml</code> file changes using</p>
+<pre><code>conda env update -f environment.yaml</code></pre>
+<p>Every time you are working on the project, activate the environment using</p>
+<pre><code>conda activate laser-calculator</code></pre>
+<h3 id="packages">Packages</h3>
+<p>If you are not using conda, below is the list of packages you need in order to start the program (version added for completness):</p>
+<ul>
+<li>numpy=1.21</li>
+<li>pint=0.17</li>
+<li>uncertainties=3.1</li>
+<li>sympy=1.8</li>
+</ul>
+<h3 id="building-and-distribution">Building and distribution</h3>
+<p>You can build the application using <code>cx_Freeze</code> package and running <code>python setup.py build</code> and <code>python setup.py bdist_msi</code>.</p>
+<h3 id="updating-readme">Updating README</h3>
+<p>If you update this file, you should also update the <code>.html</code> version of the file with the use of <code>pandoc</code>. It is made simple by running the <code>make_html_pandoc.bat</code> file.</p>
+</article>
+</body>
+</html>
