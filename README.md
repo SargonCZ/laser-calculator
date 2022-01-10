@@ -29,7 +29,7 @@ In contrast to those, however, you can quickly and simply add anything you need 
     - [Using uncertainties](#using-uncertainties)
     - [Constants in the function](#constants-in-the-function)
     - [History](#history)
-    - [Displaying this file](#displaying-this-file)
+    - [Displaying help](#displaying-help)
     - [Starting from `.bat` file with conda](#starting-from-bat-file-with-conda)
   - [Adding new functions](#adding-new-functions)
     - [Structure of the `functions.json` file](#structure-of-the-functionsjson-file)
@@ -150,9 +150,13 @@ Alternatively, one can use `Ctrl+H` shortcut. The history will be shown in separ
 
 The history is saved in the `history.json` file and can be cleared by deleting the file or by clicking the `Clear history` button in the `Options` menu.
 
-### Displaying this file
+### Displaying help
+
+![Help menu](screenshots/help.png)
 
 If you need help, you can display the `.html` version of this README file by pressing `F1` key or navigating to the `Help` menu and clicking on `Show readme` item.
+
+You can also visit the project page (this one) with clicking on the `Show on GitHub` item in the `Help` menu.
 
 ### Starting from `.bat` file with conda
 

@@ -41,6 +41,7 @@ class Calculator(ttk.Frame):
         self.p_clear = tk.PhotoImage(master=self,file=r"icons/delete.png")
         self.p_calc = tk.PhotoImage(master=self,file=r"icons/calc.png")
         self.p_help = tk.PhotoImage(master=self,file=r"icons/help.png").subsample(3)
+        self.p_GH = tk.PhotoImage(master=self,file=r"icons/GitHub.png").subsample(2)
         self.ureg = pint.UnitRegistry()
 
         # Creating function selection
@@ -80,6 +81,7 @@ class Calculator(ttk.Frame):
         self.menu_help = tk.Menu(self.menubar)
         self.menubar.add_cascade(menu=self.menu_help,label="Help")
         self.menu_help.add_command(label="Show readme",command=self.show_readme,image=self.p_help,compound=tk.LEFT,accelerator="F1")
+        self.menu_help.add_command(label="Show on GitHub",command=lambda: os.system("start \"\" https://github.com/SargonCZ/laser-calculator"),image=self.p_GH,compound=tk.LEFT)
 
         self.history_window_open = False
         self.bind_all("<Control-KeyPress-h>",self.show_history)
