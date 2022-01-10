@@ -1,0 +1,1 @@
+pandoc --template=GitHub.html5 -s README.md -o README.html
