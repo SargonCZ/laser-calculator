@@ -1,7 +1,7 @@
 import sys
 from cx_Freeze import setup, Executable
 
-build_exe_options = {"include_files": ["icons", "formulas", "constants.json", "functions.json"]}
+build_exe_options = {"include_files": ["icons", "formulas", "screenshots", "constants.json", "functions.json", "README.html"]}
 
 shortcut_table = [
     ("DesktopShortcut",        # Shortcut
