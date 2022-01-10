@@ -6,7 +6,10 @@ import json
 import sympy
 import copy
 import datetime
+import os
+import subprocess
 
+dir = os.path.dirname(__file__)
 
 
 class Calculator(ttk.Frame):    
@@ -66,6 +69,11 @@ class Calculator(ttk.Frame):
         self.menubar.add_cascade(menu=self.menu_options,label="Options")
         self.menu_options.add_command(label="Show history",command=self.show_history,image=self.p_history,compound=tk.LEFT,accelerator="Ctrl+H")
         self.menu_options.add_command(label="Clear history",command=self.clear_history,image=self.p_clear,compound=tk.LEFT)
+        self.edit_options = tk.Menu(self.menubar)
+        self.menubar.add_cascade(menu=self.edit_options,label="Edit")
+        self.edit_options.add_command(label="(Re)define functions",command=lambda: os.startfile(f"{dir}\\functions.json"))
+        self.edit_options.add_command(label="(Re)define constants",command=lambda: os.startfile(f"{dir}\\constants.json"))
+        self.edit_options.add_command(label="Open formulas folder",command=lambda: subprocess.call(f"explorer {dir}\\formulas"))
         self.history_window_open = False
         self.bind_all("<Control-KeyPress-h>",self.show_history)
 
