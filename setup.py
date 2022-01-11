@@ -1,7 +1,7 @@
 import sys
 from cx_Freeze import setup, Executable
 
-build_exe_options = {"include_files": ["icons", "formulas", "screenshots", "constants.json", "functions.json", "README.html","version.txt"]}
+build_exe_options = {"include_files": ["Icon.ico","icons", "formulas", "screenshots", "constants.json", "functions.json", "README.html","version.txt"]}
 
 shortcut_table = [
     ("DesktopShortcut",        # Shortcut
@@ -27,10 +27,10 @@ if sys.platform == "win32":
 
 setup(
     name = "Laser calculator",
-    version = "1.0",
+    version = "1.1.0",
     description = "Calculator for laser and optics equations",
     options = {"build_exe": build_exe_options, "bdist_msi": bdist_msi_options,},
-    executables = [Executable("laser-calculator.py", base=base)]
+    executables = [Executable("laser-calculator.py", base=base, icon="Icon.ico")]
 )
 
 # run by running `python setup.py build` or  `python setup.py bdist_msi`
