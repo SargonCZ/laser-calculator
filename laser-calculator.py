@@ -1,6 +1,7 @@
 import pint
 import numpy as np
 import tkinter as tk
+from tkinter import messagebox
 from tkinter import ttk
 import json
 import sympy
@@ -65,9 +66,12 @@ class Calculator(ttk.Frame):
         self.menu_options = tk.Menu(self.menubar)
         self.menubar.add_cascade(menu=self.menu_options,label="Options")
         self.menu_options.add_command(label="Show history",command=self.show_history,image=self.p_history,compound=tk.LEFT,accelerator="Ctrl+H")
+        self.menu_options.add_separator()
         self.menu_options.add_command(label="Clear history",command=self.clear_history,image=self.p_clear,compound=tk.LEFT)
         self.history_window_open = False
         self.bind_all("<Control-KeyPress-h>",self.show_history)
+
+
 
     def on_closing(self):
         '''
@@ -133,10 +137,13 @@ class Calculator(ttk.Frame):
         '''
         Clears the history
         '''
-        self.history = dict()
-        if self.history_window_open:
-            for children in self.history_tree.get_children():
-                self.history_tree.delete(children)
+        answer = messagebox.askyesno(title='Confirmation',
+                                     message='Are you sure that you want to delete history?')
+        if answer:
+            self.history = dict()
+            if self.history_window_open:
+                for children in self.history_tree.get_children():
+                    self.history_tree.delete(children)
 
     def on_function_selected(self,event=None):
         '''
