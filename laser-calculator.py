@@ -1,7 +1,6 @@
 import pint
 import numpy as np
 import tkinter as tk
-from tkinter import messagebox
 from tkinter import ttk
 from tkinter import messagebox
 import json
@@ -114,6 +113,7 @@ class Calculator(ttk.Frame):
         except:
             pass
         self.history_window = tk.Toplevel(self.master)
+        self.history_window.iconbitmap(bitmap="Icon.ico")
         self.history_window.title("History")
         self.history_window.protocol("WM_DELETE_WINDOW", self.close_history)        
         
@@ -481,5 +481,6 @@ if __name__ == "__main__": # If startes as a script/application and not loaded a
     root = tk.Tk()
     app = Calculator(root)
     app.grid(column=0,row=0)
+    root.iconbitmap(bitmap="Icon.ico")
     root.mainloop()
     

@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </head>
 <body>
 <article class="markdown-body">
-<h1 id="laser-and-optics-calculator">🌠 Laser and optics calculator</h1>
+<h1 id="laser-and-optics-calculator">Laser and optics calculator</h1>
 <p>This is a simple calculator, which quickly allows one to calculate various functions and solve equations common in the optics and laser community. The two main things I have focused on are:</p>
 <ol type="1">
 <li><strong>Units</strong> - all the calculations are working with the physical units that can be chosen by the users.</li>
@@ -144,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <h2 id="table-of-contents">Table of contents</h2>
 <ul>
-<li><a href="#-laser-and-optics-calculator">🌠 Laser and optics calculator</a>
+<li><a href="#laser-and-optics-calculator">Laser and optics calculator</a>
 <ul>
 <li><a href="#table-of-contents">Table of contents</a></li>
 <li><a href="#application-usage">Application usage</a>
@@ -160,6 +160,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#constants-in-the-function">Constants in the function</a></li>
 <li><a href="#history">History</a></li>
 <li><a href="#displaying-help">Displaying help</a></li>
+<li><a href="#check-for-updates">Check for updates</a></li>
 <li><a href="#starting-from-bat-file-with-conda">Starting from <code>.bat</code> file with conda</a></li>
 </ul></li>
 <li><a href="#adding-new-functions">Adding new functions</a>
@@ -212,6 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>New functions can be easily added by following the section <a href="#adding-new-functions">Adding new functions</a>.</p>
 <h3 id="starting-the-application">Starting the application</h3>
 <p>To start the application by running <code>laser-calculator.py</code>, you need to have python installed and following packages have to be available: <code>numpy</code>, <code>pint</code>, <code>uncertainties</code> and <code>sympy</code>. In case you are using conda package manager, you can set up the environment <a href="#setting-up-conda-environment">like this</a> and then start the program <a href="#starting-from-bat-file-with-conda">like this</a>.</p>
+<p>If you have installed the program using the <code>.msi</code> installer, you can start the program by double-clicking on the desktop icon <img src="icons/icon16.png" />.</p>
 <h3 id="basic-overview">Basic overview</h3>
 <p>After the application is started, following window appears:</p>
 <figure>
@@ -276,19 +278,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The history is saved in the <code>history.json</code> file and can be cleared by deleting the file or by clicking the <code>Clear history</code> button in the <code>Options</code> menu.</p>
 <h3 id="displaying-help">Displaying help</h3>
 <figure>
-<img src="screenshots/help.png" alt="Help menu" /><figcaption aria-hidden="true">Help menu</figcaption>
+<img src="screenshots/help-menu.png" alt="Help menu" /><figcaption aria-hidden="true">Help menu</figcaption>
 </figure>
 <p>If you need help, you can display the <code>.html</code> version of this README file by pressing <code>F1</code> key or navigating to the <code>Help</code> menu and clicking on <code>Show readme</code> item.</p>
 <p>You can also visit the project page (this one) with clicking on the <code>Show on GitHub</code> item in the <code>Help</code> menu.</p>
+<h3 id="check-for-updates">Check for updates</h3>
+<p>You can check for updates from the last item in the <code>Help</code> menu. This will check your version from the current version in the main branch of the project GitHub repository, and if the versions are different, you can be redirected to the webpage to download the new version manually.</p>
 <h3 id="starting-from-.bat-file-with-conda">Starting from <code>.bat</code> file with conda</h3>
-<p>If you have conda installed and use the appropriate conda environment, and you would like to quickly start the program just by double-clicking some icon, you can create a <code>.bat</code> file in the notepad for example. In this file, something similar to the follwong command should be written:</p>
+<p>If you have conda installed and use the appropriate conda environment, and you would like to quickly start the program just by double-clicking some icon, you can create a <code>.bat</code> file in the notepad for example. In this file, something similar to the following command should be written:</p>
 <pre class="bat"><code>Call C:\Users\user.name\Anaconda3\Scripts\activate.bat &amp; conda activate laser-calculator &amp; cd &quot;C:\Users\user.name\Documents\Python\laser-calculator&quot; &amp; python &quot;C:\Users\user.name\Documents\Python\laser-calculator\laser-calculator.py&quot;
 pause</code></pre>
 <p>Of course, you have to change the <code>user.name</code> and the file locations. This will first activate conda in the open command prompt, next it will activate the respective python environment. Afterwards, it will change the working directory to the folder, where the program is saved, and finally, it will start the program. You can of course use any other method. For this to work, you theoretically don’t need to have python and conda added in your system path.</p>
 <hr />
 <h2 id="adding-new-functions">Adding new functions</h2>
-<p>New function can be added to the <code>functions.json</code> file. The program offers the option to directly open and edit the <code>functions.json</code> file in the default editor by selecting the <code>"(Re)define functions"</code> from the <code>"Edit"</code> menu. The structure of the file is described <a href="#structure-of-the-functionsjson-file">below</a>. All the function equations are evaluated by the python script with the use of <code>eval</code> or <code>exec</code>, which can make some mess, if you write something else than the intended function there. The program is not very strict in controlling what does it evaluate, since we are all consenting adults.</p>
-<p>Each function can have an assigned equation saved as a <code>png</code> figure, which is displayed in the program. The equations are generated by webpage https://latex.codecogs.com/legacy/eqneditor/editor.php, downloaded in png format and saved in the <code>formulas</code> folder with the same name, as is the name of the function definition.</p>
+<p>New function can be added to the <code>functions.json</code> file. The program offers the option to directly open and edit the <code>functions.json</code> file in the default editor by selecting the <code>(Re)define functions</code> from the <code>Edit</code> menu.</p>
+<figure>
+<img src="screenshots/edit-menu.png" alt="Edit menu" /><figcaption aria-hidden="true">Edit menu</figcaption>
+</figure>
+<p>The structure of the file is described <a href="#structure-of-the-functionsjson-file">below</a>. All the function equations are evaluated by the python script with the use of <code>eval</code> or <code>exec</code>, which can make some mess, if you write something else than the intended function there. The program is not very strict in controlling what does it evaluate, since we are all consenting adults.</p>
+<p>Each function can have an assigned equation saved as a <code>png</code> figure, which is displayed in the program. The equations are generated by webpage https://latex.codecogs.com/legacy/eqneditor/editor.php, downloaded in png format and saved in the <code>formulas</code> folder with the same name, as is the name of the function definition. The folder can be opened from the <code>Edit</code> menu.</p>
 <p>If you want me to add a new function, you can open an issue. Preferably, attach also the formula, description and other parts yourself. You can of course fork the repository and eventually open a pull request.</p>
 <h3 id="structure-of-the-functions.json-file">Structure of the <code>functions.json</code> file</h3>
 <p>How does the definition of one sample function look like in the <code>functions.json</code> file is shown below.</p>
@@ -392,7 +400,7 @@ pause</code></pre>
 <img src="screenshots/bandwidth.png" alt="Variable in solve regime" /><figcaption aria-hidden="true">Variable in solve regime</figcaption>
 </figure>
 <h3 id="structure-of-the-constants.json-file">Structure of the <code>constants.json</code> file</h3>
-<p>The program also offers the option to directly open and edit the <code>constants.json</code> file in the default editor by selecting the <code>"(Re)define constants"</code> from the <code>"Edit"</code> menu. Currently, the <code>constants.json</code> file looks like this:</p>
+<p>The program also offers the option to directly open and edit the <code>constants.json</code> file in the default editor by selecting the <code>(Re)define constants</code> from the <code>Edit</code> menu. Currently, the <code>constants.json</code> file looks like this:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;n2&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;air, 308 nm, 1 atm&quot;</span><span class="fu">:</span> <span class="st">&quot;1.22e-22 m^2/W&quot;</span><span class="fu">,</span></span>
