@@ -30,6 +30,7 @@ In contrast to those, however, you can quickly and simply add anything you need 
     - [Constants in the function](#constants-in-the-function)
     - [History](#history)
     - [Displaying help](#displaying-help)
+    - [Check for updates](#check-for-updates)
     - [Starting from `.bat` file with conda](#starting-from-bat-file-with-conda)
   - [Adding new functions](#adding-new-functions)
     - [Structure of the `functions.json` file](#structure-of-the-functionsjson-file)
@@ -157,6 +158,10 @@ The history is saved in the `history.json` file and can be cleared by deleting t
 If you need help, you can display the `.html` version of this README file by pressing `F1` key or navigating to the `Help` menu and clicking on `Show readme` item.
 
 You can also visit the project page (this one) with clicking on the `Show on GitHub` item in the `Help` menu.
+
+### Check for updates
+
+You can check for updates from the last item in the `Help` menu. This will check your version from the current version in the main branch of the project GitHub repository, and if the versions are different, you can be redirected to the webpage to download the new version manually.
 
 ### Starting from `.bat` file with conda
 

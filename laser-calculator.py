@@ -2,12 +2,14 @@ import pint
 import numpy as np
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 import json
 import sympy
 import copy
 import datetime
 import os
 import subprocess
+import urllib.request
 
 dir = os.path.dirname(__file__)
 
@@ -42,6 +44,7 @@ class Calculator(ttk.Frame):
         self.p_calc = tk.PhotoImage(master=self,file=r"icons/calc.png")
         self.p_help = tk.PhotoImage(master=self,file=r"icons/help.png").subsample(3)
         self.p_GH = tk.PhotoImage(master=self,file=r"icons/GitHub.png").subsample(2)
+        self.p_update = tk.PhotoImage(master=self,file=r"icons/update.png").subsample(3)
         self.ureg = pint.UnitRegistry()
 
         # Creating function selection
@@ -81,7 +84,8 @@ class Calculator(ttk.Frame):
         self.menu_help = tk.Menu(self.menubar)
         self.menubar.add_cascade(menu=self.menu_help,label="Help")
         self.menu_help.add_command(label="Show readme",command=self.show_readme,image=self.p_help,compound=tk.LEFT,accelerator="F1")
-        self.menu_help.add_command(label="Show on GitHub",command=lambda: os.system("start \"\" https://github.com/SargonCZ/laser-calculator"),image=self.p_GH,compound=tk.LEFT)
+        self.menu_help.add_command(label="Show on GitHub",command=self.visit_github,image=self.p_GH,compound=tk.LEFT)
+        self.menu_help.add_command(label="Check for updates",command=self.check_updates,image=self.p_update,compound=tk.LEFT)
 
         self.history_window_open = False
         self.bind_all("<Control-KeyPress-h>",self.show_history)
@@ -156,11 +160,38 @@ class Calculator(ttk.Frame):
             for children in self.history_tree.get_children():
                 self.history_tree.delete(children)
 
+    def check_updates(self):
+        '''
+        Checks the github repository for the latest version
+        '''
+        try:
+            with open("version.txt","r") as file:
+                version_current = file.readline().strip()
+                version_remote_url = file.readline().strip()
+        except FileNotFoundError:
+            messagebox.showerror(message="Could not find current version",title="Error")
+            return
+        try:
+            with urllib.request.urlopen(version_remote_url) as rv:
+                version_remote = rv.readline().decode().strip()
+        except urllib.error.HTTPError:
+            messagebox.showerror(message="Could not find newest version",title="Error")
+            return
+        if version_current == version_remote:
+            messagebox.showinfo(message="You have the newest version",title="Everything is up to date")
+        else:
+            reply = messagebox.askyesno(message=f"Your version is {version_current}, remote version is {version_remote}. Would you like to visit the website to download the newere version?",title="New version available")
+            if reply:
+                self.visit_github()
+
     def show_readme(self,event=None):
         '''
         Shows HTML version of the README file
         '''
         os.startfile(f"{dir}\\README.html")
+
+    def visit_github(self):
+        os.system("start \"\" https://github.com/SargonCZ/laser-calculator")
 
     def on_function_selected(self,event=None):
         '''
