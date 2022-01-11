@@ -11,8 +11,6 @@ import os
 import subprocess
 import urllib.request
 
-dir = os.path.dirname(__file__)
-
 
 class Calculator(ttk.Frame):    
     '''
@@ -28,7 +26,7 @@ class Calculator(ttk.Frame):
         self.master.title("Laser calculator")
         self.master.option_add("*tearOff", tk.FALSE)
         self.master.protocol("WM_DELETE_WINDOW", self.on_closing)      
-
+        self.dir = os.path.dirname(__file__)
         # Loading everything
         with open('functions.json', 'r') as file:
             self.settings = json.load(file)
@@ -78,9 +76,9 @@ class Calculator(ttk.Frame):
 
         self.edit_options = tk.Menu(self.menubar)
         self.menubar.add_cascade(menu=self.edit_options,label="Edit")
-        self.edit_options.add_command(label="(Re)define functions",command=lambda: os.startfile(f"{dir}\\functions.json"))
-        self.edit_options.add_command(label="(Re)define constants",command=lambda: os.startfile(f"{dir}\\constants.json"))
-        self.edit_options.add_command(label="Open formulas folder",command=lambda: subprocess.call(f"explorer {dir}\\formulas"))
+        self.edit_options.add_command(label="(Re)define functions",command=lambda: os.startfile("functions.json"))
+        self.edit_options.add_command(label="(Re)define constants",command=lambda: os.startfile("constants.json"))
+        self.edit_options.add_command(label="Open formulas folder",command=lambda: os.startfile("formulas"))
 
         self.menu_help = tk.Menu(self.menubar)
         self.menubar.add_cascade(menu=self.menu_help,label="Help")
@@ -195,7 +193,7 @@ class Calculator(ttk.Frame):
         '''
         Shows HTML version of the README file
         '''
-        os.startfile(f"{dir}\\README.html")
+        os.startfile("README.html")
 
     def visit_github(self):
         os.system("start \"\" https://github.com/SargonCZ/laser-calculator")
