@@ -14,6 +14,8 @@ Nice online calculators, that can do similar stuff, are these:
 
 In contrast to those, however, you can quickly and simply add anything you need to this one 👍.
 
+If you don't know or use python and would like to just use the program, you can check the `Releases` section, or you can directly download the [installer](https://github.com/SargonCZ/laser-calculator/releases/download/v1.1.0/Laser-calculator-1.1.0-win64-installer.msi) or the [portable](https://github.com/SargonCZ/laser-calculator/releases/download/v1.1.0/Laser-calculator-1.1.0-win64-portable.zip) version.
+
 ---
 
 ## Table of contents
