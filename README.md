@@ -59,6 +59,7 @@ If you don't know or use python and would like to just use the program, you can 
   - Peak fluence (calc)
   - Peak intensity (calc)
   - Peak power-energy-duration relation (solve)
+  - Power density (calc)
   - Pulse length-bandwidth relation (solve)
 - Nonlinear:
   - Critical power for self-focusing (calc)
@@ -128,6 +129,7 @@ This works only for linear function (meaning no `sin` and similar):
 - Peak fluence
 - Peak intensity
 - Peak power-energy-duration relation
+- Power density
 - Pulse length-bandwidth relation
 - Frequency-wavelength conversion
 - Critical power for self-focusing (but it doesn't really make sense here)
@@ -304,7 +306,7 @@ In the program, this last variable will be shown, but it will be in `readonly` o
 ### Structure of the `constants.json` file
 
 The program also offers the option to directly open and edit the `constants.json` file in the default editor by selecting the `(Re)define constants` from the `Edit` menu.
-Currently, the `constants.json` file looks like this:
+For example, the first constant in the `constants.json` file is defined like this:
 
 ```json
 {
@@ -316,15 +318,11 @@ Currently, the `constants.json` file looks like this:
     "LBO, 850 nm": "1.9e-20 m^2/W",
     "YAG, 1064 nm": "6.2e-20 m^2/W"
   },
-  "TBP": {
-    "Gaussian": "0.441271",
-    "sech": "0.314833",
-    "Lorentzian": "0.141999"
-  }
+  ...
 }
 ```
 
-It is a dictionary of constants defined by the keys (names, referenced in the definition of the functions) and values, which can take any form following the `"name" : "value"` convention and will be displayed in the program, when the associated functions are chosen.
+The whole file is a dictionary of constants defined by the keys (names, referenced in the definition of the functions) and values, which can take any form following the `"name" : "value"` convention and will be displayed in the program, when the associated functions are chosen. The value will be treated as text and not a number with a unit or anything special.
 
 ---
 

@@ -11,5 +11,9 @@
         "Gaussian" : "0.441271",
         "sech" : "0.314833",
         "Lorentzian" : "0.141999"
+    },
+    "Beam shape" : {
+        "Top-hat" : "1",
+        "Gaussian" : "2"
     }
 }

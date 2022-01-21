@@ -635,5 +635,44 @@
                 ]
             }         
         }
+    },
+    "power-density" : {
+        "name" : "(Lasers) Power density",
+        "regime" : "calc",
+        "description" : "Calculates the power density of a laser beam. The beam diameter follows the D4s definition.",
+        "function" : "I[2]*I[0]/(np.pi*(I[1]/2)**2)",
+        "inputs": {
+            "Power" : {
+                "position" : 0,
+                "units" : [
+                    "W",
+                    "mW",
+                    "kW"
+                ]
+            },
+            "Beam diameter" : {
+                "position" : 1,
+                "units" : [
+                    "mm",
+                    "um"
+                ]
+            },
+            "Beam shape" : {
+                "position" : 2,
+                "units" : []
+            }
+        },
+        "outputs" : {
+            "name" : "Power density",
+            "units" : [
+                "W/cm^2",
+                "kW/cm^2",
+                "MW/cm^2",
+                "GW/cm^2"                
+            ]
+        },
+        "constants" : [
+            "Beam shape"
+        ]
     }
 }
